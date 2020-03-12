@@ -4,9 +4,9 @@ Backend for the SmartPrint3D.io application and reserarch project
 
 - [x] Pre-survey form
 - [x] API 
-- [] Post-survey form
-- [] Integration with the *shop*
-- [] Tests and security
+- [ ] Post-survey form
+- [ ] Integration with the *shop*
+- [ ] Tests and security
 
 Installation
 
