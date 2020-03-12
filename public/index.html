@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Pre-order Survey</title>
+  <link rel="stylesheet"
+    href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css"
+    integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="styles/style.css">
+</head>
+
+<body>
+  <div class="container-fluid" id="nav"></div>
+  <form id="survey" name="survey">
+    <div class="container">
+      <div class="py-5 text-center">
+        <img class="d-block mx-auto mb-4" src="/docs/4.3/assets/brand/bootstrap-solid.svg" alt="" width="72"
+          height="72">
+        <h2>智打印3D Survey</h2>
+        <p class="lead">Pre-order perception and satisfaction of 3D Printing service and Macau as a smart city for local
+          residents and destination image for tourist.</p>
+      </div>
+
+      <h4 class="mt-5">01. 您的性别？*</h4>
+      <div class="radio">
+        <label> 男 <input type="radio" name="q1" id="q1y" value="Y"></label>
+      </div>
+      <div class="radio">
+        <label> 男 <input type="radio" name="q1" id="q1n" value="N"></label>
+      </div>
+
+      <h4 class="mt-5">02. 您的年龄？</h4>
+      <div class="radio">
+        <label> 20岁及以下 <input type="radio" name="q2" id="q21" value="20岁及以下"></label>
+      </div>
+      <div class="radio">
+        <label> 21-25岁 <input type="radio" name="q2" id="q22" value="21-25岁"></label>
+      </div>
+      <div class="radio">
+        <label> 26-30岁 <input type="radio" name="q2" id="q23" value="26-30岁"></label>
+      </div>
+      <div class="radio">
+        <label> 31-40岁 <input type="radio" name="q2" id="q24" value="31-40岁"></label>
+      </div>
+      <div class="radio">
+        <label> 40岁及以上 <input type="radio" name="q2" id="q25" value="40岁及以上"></label>
+      </div>
+
+      <h4 class="mt-5">03. Place of Origin</h4>
+
+      <div class="form-group">
+        <!-- <label for="apparatus.country" class="bmd-label-floating">Country</label> -->
+        <select class="form-control custom-select d-block w-100" id="q3" name="q3">
+          <option value="">Country</option>
+          <option value="MO">Macao</option>
+          <option value="HK">Hong Kong</option>
+          <option value="CN">China</option>
+          <option value="">-------------------</option>
+          <option value="AF">Afghanistan</option>
+          <option value="AX">Åland Islands</option>
+          <option value="AL">Albania</option>
+          <option value="DZ">Algeria</option>
+          <option value="AS">American Samoa</option>
+          <option value="AD">Andorra</option>
+          <option value="AO">Angola</option>
+          <option value="AI">Anguilla</option>
+          <option value="AQ">Antarctica</option>
+          <option value="AG">Antigua and Barbuda</option>
+          <option value="AR">Argentina</option>
+          <option value="AM">Armenia</option>
+          <option value="AW">Aruba</option>
+          <option value="AU">Australia</option>
+          <option value="AT">Austria</option>
+          <option value="AZ">Azerbaijan</option>
+          <option value="BS">Bahamas</option>
+          <option value="BH">Bahrain</option>
+          <option value="BD">Bangladesh</option>
+          <option value="BB">Barbados</option>
+          <option value="BY">Belarus</option>
+          <option value="BE">Belgium</option>
+          <option value="BZ">Belize</option>
+          <option value="BJ">Benin</option>
+          <option value="BM">Bermuda</option>
+          <option value="BT">Bhutan</option>
+          <option value="BO">Bolivia, Plurinational State of</option>
+          <option value="BQ">Bonaire, Sint Eustatius and Saba</option>
+          <option value="BA">Bosnia and Herzegovina</option>
+          <option value="BW">Botswana</option>
+          <option value="BV">Bouvet Island</option>
+          <option value="BR">Brazil</option>
+          <option value="IO">British Indian Ocean Territory</option>
+          <option value="BN">Brunei Darussalam</option>
+          <option value="BG">Bulgaria</option>
+          <option value="BF">Burkina Faso</option>
+          <option value="BI">Burundi</option>
+          <option value="KH">Cambodia</option>
+          <option value="CM">Cameroon</option>
+          <option value="CA">Canada</option>
+          <option value="CV">Cape Verde</option>
+          <option value="KY">Cayman Islands</option>
+          <option value="CF">Central African Republic</option>
+          <option value="TD">Chad</option>
+          <option value="CL">Chile</option>
+          <option value="CN">China</option>
+          <option value="CX">Christmas Island</option>
+          <option value="CC">Cocos (Keeling) Islands</option>
+          <option value="CO">Colombia</option>
+          <option value="KM">Comoros</option>
+          <option value="CG">Congo</option>
+          <option value="CD">Congo, the Democratic Republic of the</option>
+          <option value="CK">Cook Islands</option>
+          <option value="CR">Costa Rica</option>
+          <option value="CI">Côte d'Ivoire</option>
+          <option value="HR">Croatia</option>
+          <option value="CU">Cuba</option>
+          <option value="CW">Curaçao</option>
+          <option value="CY">Cyprus</option>
+          <option value="CZ">Czech Republic</option>
+          <option value="DK">Denmark</option>
+          <option value="DJ">Djibouti</option>
+          <option value="DM">Dominica</option>
+          <option value="DO">Dominican Republic</option>
+          <option value="EC">Ecuador</option>
+          <option value="EG">Egypt</option>
+          <option value="SV">El Salvador</option>
+          <option value="GQ">Equatorial Guinea</option>
+          <option value="ER">Eritrea</option>
+          <option value="EE">Estonia</option>
+          <option value="ET">Ethiopia</option>
+          <option value="FK">Falkland Islands (Malvinas)</option>
+          <option value="FO">Faroe Islands</option>
+          <option value="FJ">Fiji</option>
+          <option value="FI">Finland</option>
+          <option value="FR">France</option>
+          <option value="GF">French Guiana</option>
+          <option value="PF">French Polynesia</option>
+          <option value="TF">French Southern Territories</option>
+          <option value="GA">Gabon</option>
+          <option value="GM">Gambia</option>
+          <option value="GE">Georgia</option>
+          <option value="DE">Germany</option>
+          <option value="GH">Ghana</option>
+          <option value="GI">Gibraltar</option>
+          <option value="GR">Greece</option>
+          <option value="GL">Greenland</option>
+          <option value="GD">Grenada</option>
+          <option value="GP">Guadeloupe</option>
+          <option value="GU">Guam</option>
+          <option value="GT">Guatemala</option>
+          <option value="GG">Guernsey</option>
+          <option value="GN">Guinea</option>
+          <option value="GW">Guinea-Bissau</option>
+          <option value="GY">Guyana</option>
+          <option value="HT">Haiti</option>
+          <option value="HM">Heard Island and McDonald Islands</option>
+          <option value="VA">Holy See (Vatican City State)</option>
+          <option value="HN">Honduras</option>
+          <option value="HK">Hong Kong</option>
+          <option value="HU">Hungary</option>
+          <option value="IS">Iceland</option>
+          <option value="IN">India</option>
+          <option value="ID">Indonesia</option>
+          <option value="IR">Iran, Islamic Republic of</option>
+          <option value="IQ">Iraq</option>
+          <option value="IE">Ireland</option>
+          <option value="IM">Isle of Man</option>
+          <option value="IL">Israel</option>
+          <option value="IT">Italy</option>
+          <option value="JM">Jamaica</option>
+          <option value="JP">Japan</option>
+          <option value="JE">Jersey</option>
+          <option value="JO">Jordan</option>
+          <option value="KZ">Kazakhstan</option>
+          <option value="KE">Kenya</option>
+          <option value="KI">Kiribati</option>
+          <option value="KP">Korea, Democratic People's Republic of</option>
+          <option value="KR">Korea, Republic of</option>
+          <option value="KW">Kuwait</option>
+          <option value="KG">Kyrgyzstan</option>
+          <option value="LA">Lao People's Democratic Republic</option>
+          <option value="LV">Latvia</option>
+          <option value="LB">Lebanon</option>
+          <option value="LS">Lesotho</option>
+          <option value="LR">Liberia</option>
+          <option value="LY">Libya</option>
+          <option value="LI">Liechtenstein</option>
+          <option value="LT">Lithuania</option>
+          <option value="LU">Luxembourg</option>
+          <option value="MO">Macao</option>
+          <option value="MK">Macedonia, the former Yugoslav Republic of</option>
+          <option value="MG">Madagascar</option>
+          <option value="MW">Malawi</option>
+          <option value="MY">Malaysia</option>
+          <option value="MV">Maldives</option>
+          <option value="ML">Mali</option>
+          <option value="MT">Malta</option>
+          <option value="MH">Marshall Islands</option>
+          <option value="MQ">Martinique</option>
+          <option value="MR">Mauritania</option>
+          <option value="MU">Mauritius</option>
+          <option value="YT">Mayotte</option>
+          <option value="MX">Mexico</option>
+          <option value="FM">Micronesia, Federated States of</option>
+          <option value="MD">Moldova, Republic of</option>
+          <option value="MC">Monaco</option>
+          <option value="MN">Mongolia</option>
+          <option value="ME">Montenegro</option>
+          <option value="MS">Montserrat</option>
+          <option value="MA">Morocco</option>
+          <option value="MZ">Mozambique</option>
+          <option value="MM">Myanmar</option>
+          <option value="NA">Namibia</option>
+          <option value="NR">Nauru</option>
+          <option value="NP">Nepal</option>
+          <option value="NL">Netherlands</option>
+          <option value="NC">New Caledonia</option>
+          <option value="NZ">New Zealand</option>
+          <option value="NI">Nicaragua</option>
+          <option value="NE">Niger</option>
+          <option value="NG">Nigeria</option>
+          <option value="NU">Niue</option>
+          <option value="NF">Norfolk Island</option>
+          <option value="MP">Northern Mariana Islands</option>
+          <option value="NO">Norway</option>
+          <option value="OM">Oman</option>
+          <option value="PK">Pakistan</option>
+          <option value="PW">Palau</option>
+          <option value="PS">Palestinian Territory, Occupied</option>
+          <option value="PA">Panama</option>
+          <option value="PG">Papua New Guinea</option>
+          <option value="PY">Paraguay</option>
+          <option value="PE">Peru</option>
+          <option value="PH">Philippines</option>
+          <option value="PN">Pitcairn</option>
+          <option value="PL">Poland</option>
+          <option value="PT">Portugal</option>
+          <option value="PR">Puerto Rico</option>
+          <option value="QA">Qatar</option>
+          <option value="RE">Réunion</option>
+          <option value="RO">Romania</option>
+          <option value="RU">Russian Federation</option>
+          <option value="RW">Rwanda</option>
+          <option value="BL">Saint Barthélemy</option>
+          <option value="SH">Saint Helena, Ascension and Tristan da Cunha</option>
+          <option value="KN">Saint Kitts and Nevis</option>
+          <option value="LC">Saint Lucia</option>
+          <option value="MF">Saint Martin (French part)</option>
+          <option value="PM">Saint Pierre and Miquelon</option>
+          <option value="VC">Saint Vincent and the Grenadines</option>
+          <option value="WS">Samoa</option>
+          <option value="SM">San Marino</option>
+          <option value="ST">Sao Tome and Principe</option>
+          <option value="SA">Saudi Arabia</option>
+          <option value="SN">Senegal</option>
+          <option value="RS">Serbia</option>
+          <option value="SC">Seychelles</option>
+          <option value="SL">Sierra Leone</option>
+          <option value="SG">Singapore</option>
+          <option value="SX">Sint Maarten (Dutch part)</option>
+          <option value="SK">Slovakia</option>
+          <option value="SI">Slovenia</option>
+          <option value="SB">Solomon Islands</option>
+          <option value="SO">Somalia</option>
+          <option value="ZA">South Africa</option>
+          <option value="GS">South Georgia and the South Sandwich Islands</option>
+          <option value="SS">South Sudan</option>
+          <option value="ES">Spain</option>
+          <option value="LK">Sri Lanka</option>
+          <option value="SD">Sudan</option>
+          <option value="SR">Suriname</option>
+          <option value="SJ">Svalbard and Jan Mayen</option>
+          <option value="SZ">Swaziland</option>
+          <option value="SE">Sweden</option>
+          <option value="CH">Switzerland</option>
+          <option value="SY">Syrian Arab Republic</option>
+          <option value="TW">Taiwan, Province of China</option>
+          <option value="TJ">Tajikistan</option>
+          <option value="TZ">Tanzania, United Republic of</option>
+          <option value="TH">Thailand</option>
+          <option value="TL">Timor-Leste</option>
+          <option value="TG">Togo</option>
+          <option value="TK">Tokelau</option>
+          <option value="TO">Tonga</option>
+          <option value="TT">Trinidad and Tobago</option>
+          <option value="TN">Tunisia</option>
+          <option value="TR">Turkey</option>
+          <option value="TM">Turkmenistan</option>
+          <option value="TC">Turks and Caicos Islands</option>
+          <option value="TV">Tuvalu</option>
+          <option value="UG">Uganda</option>
+          <option value="UA">Ukraine</option>
+          <option value="AE">United Arab Emirates</option>
+          <option value="GB">United Kingdom</option>
+          <option value="US">United States</option>
+          <option value="UM">United States Minor Outlying Islands</option>
+          <option value="UY">Uruguay</option>
+          <option value="UZ">Uzbekistan</option>
+          <option value="VU">Vanuatu</option>
+          <option value="VE">Venezuela, Bolivarian Republic of</option>
+          <option value="VN">Viet Nam</option>
+          <option value="VG">Virgin Islands, British</option>
+          <option value="VI">Virgin Islands, U.S.</option>
+          <option value="WF">Wallis and Futuna</option>
+          <option value="EH">Western Sahara</option>
+          <option value="YE">Yemen</option>
+          <option value="ZM">Zambia</option>
+          <option value="ZW">Zimbabwe</option>
+        </select>
+        <span class="bmd-help">
+          Please select a country.
+        </span>
+      </div>
+
+      <h4 class="mt-5">04. Occupation</h4>
+      <div class="radio">
+        <label> Student <input type="radio" name="q4" id="q41" value="student"></label>
+      </div>
+      <div class="radio">
+        <label> Housewife ??? <input type="radio" name="q4" id="q42" value="housewife"></label>
+      </div>
+      <div class="radio">
+        <label> Retired <input type="radio" name="q4" id="q43" value="retired"></label>
+      </div>
+      <div class="radio">
+        <label> Blue-collar ??? <input type="radio" name="q4" id="q44" value="bluecollar"></label>
+      </div>
+      <div class="radio">
+        <label> Self-Employed <input type="radio" name="q4" id="q45" value="selfemployed"></label>
+      </div>
+      <div class="radio">
+        <label> Management <input type="radio" name="q4" id="q46" value="management"></label>
+      </div>
+      <div class="radio">
+        <label> Unemployed <input type="radio" name="q4" id="q47" value="unemployed"></label>
+      </div>
+
+      <h4 class="mt-5">05. Which of the following describe well the image of Macau?</h4>
+      <div class="row">
+        <div class="col-6 col-lg-3 text-left">
+          非常不符合
+        </div>
+        <div class="col-6 col-lg-3 text-right">
+          非常符合
+        </div>
+      </div>
+
+
+      <p style="margin-bottom: -10px; margin-top: 30px">A city full of culture and history</p>
+      <div class="btn-group btn-group-toggle" data-toggle="buttons">
+        <label class="btn btn-secondary">
+          <input type="radio" name="q51" id="q511" autocomplete="off"> <span>1</span>
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="q51" id="q512" autocomplete="off"> <span>2</span>
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="q51" id="q513" autocomplete="off"> <span>3</span>
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="q51" id="q514" autocomplete="off"> <span>4</span>
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="q51" id="q515" autocomplete="off"> <span>5</span>
+        </label>
+      </div>
+
+      <p style="margin-bottom: -10px; margin-top: 30px">A city rich in different cuisines</p>
+      <div class="btn-group btn-group-toggle" data-toggle="buttons">
+        <label class="btn btn-secondary">
+          <input type="radio" name="q52" id="q521" autocomplete="off"> <span>1</span>
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="q52" id="q522" autocomplete="off"> <span>2</span>
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="q52" id="q523" autocomplete="off"> <span>3</span>
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="q52" id="q524" autocomplete="off"> <span>4</span>
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="q52" id="q525" autocomplete="off"> <span>5</span>
+        </label>
+      </div>
+
+      <p style="margin-bottom: -10px; margin-top: 30px">A city of entertainment (shows and festivals)</p>
+      <div class="btn-group btn-group-toggle" data-toggle="buttons">
+        <label class="btn btn-secondary">
+          <input type="radio" name="q53" id="q531" autocomplete="off"> <span>1</span>
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="q53" id="q532" autocomplete="off"> <span>2</span>
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="q53" id="q533" autocomplete="off"> <span>3</span>
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="q53" id="q534" autocomplete="off"> <span>4</span>
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="q53" id="q535" autocomplete="off"> <span>5</span>
+        </label>
+      </div>
+
+      <p style="margin-bottom: -10px; margin-top: 30px">A city of gaming</p>
+      <div class="btn-group btn-group-toggle" data-toggle="buttons">
+        <label class="btn btn-secondary">
+          <input type="radio" name="q54" id="q541" autocomplete="off"> <span>1</span>
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="q54" id="q542" autocomplete="off"> <span>2</span>
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="q54" id="q543" autocomplete="off"> <span>3</span>
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="q54" id="q544" autocomplete="off"> <span>4</span>
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="q54" id="q545" autocomplete="off"> <span>5</span>
+        </label>
+      </div>
+
+      <p style="margin-bottom: -10px; margin-top: 30px">A city of creativity and innovation</p>
+      <div class="btn-group btn-group-toggle" data-toggle="buttons">
+        <label class="btn btn-secondary">
+          <input type="radio" name="q55" id="q551" autocomplete="off"> <span>1</span>
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="q55" id="q552" autocomplete="off"> <span>2</span>
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="q55" id="q553" autocomplete="off"> <span>3</span>
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="q55" id="q554" autocomplete="off"> <span>4</span>
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="q55" id="q555" autocomplete="off"> <span>5</span>
+        </label>
+      </div>
+
+      <p style="margin-bottom: -10px; margin-top: 30px">A city for shopping</p>
+      <div class="btn-group btn-group-toggle" data-toggle="buttons">
+        <label class="btn btn-secondary">
+          <input type="radio" name="q56" id="q561" autocomplete="off"> <span>1</span>
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="q56" id="q562" autocomplete="off"> <span>2</span>
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="q56" id="q563" autocomplete="off"> <span>3</span>
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="q56" id="q564" autocomplete="off"> <span>4</span>
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="q56" id="q565" autocomplete="off"> <span>5</span>
+        </label>
+      </div>
+
+      <p style="margin-bottom: -10px; margin-top: 30px">A city of advanced technologies</p>
+      <div class="btn-group btn-group-toggle" data-toggle="buttons">
+        <label class="btn btn-secondary">
+          <input type="radio" name="q57" id="q571" autocomplete="off"> <span>1</span>
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="q57" id="q572" autocomplete="off"> <span>2</span>
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="q57" id="q573" autocomplete="off"> <span>3</span>
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="q57" id="q574" autocomplete="off"> <span>4</span>
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="q57" id="q575" autocomplete="off"> <span>5</span>
+        </label>
+      </div>
+
+      <h4 class="mt-5">
+        06. Have you heard of "Smart City"?*
+      </h4>
+      <div class="radio">
+        <label> Yes <input type="radio" name="q6" id="q61" value="Y"></label>
+      </div>
+      <div class="radio">
+        <label> No <input type="radio" name="q6" id="q62" value="N"></label>
+      </div>
+
+      <h4 class="mt-5">
+        07. Do you understand what is "Smart City"?*
+      </h4>
+      <div class="radio">
+        <label> Yes <input type="radio" name="q7" id="q71" value="Y"></label>
+      </div>
+      <div class="radio">
+        <label> No <input type="radio" name="q7" id="q72" value="N"></label>
+      </div>
+
+      <h4 class="mt-5">
+        08. 3D Printing Kiosk is necessary for a smart city*
+      </h4>
+
+
+      <div class="row">
+        <div class="col-6 col-lg-3 text-left">
+          非常不符合
+        </div>
+        <div class="col-6 col-lg-3 text-right">
+          非常符合
+        </div>
+      </div>
+
+      <div class="btn-group btn-group-toggle" data-toggle="buttons">
+        <label class="btn btn-secondary">
+          <input type="radio" name="q8" id="q81" autocomplete="off" value="q81"> <span>1</span>
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="q8" id="q82" autocomplete="off" value="q82"> <span>2</span>
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="q8" id="q83" autocomplete="off" value="q83"> <span>3</span>
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="q8" id="q84" autocomplete="off" value="q84"> <span>4</span>
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="q8" id="q85" autocomplete="off" value="q85"> <span>5</span>
+        </label>
+      </div>
+
+
+      <h4 class="mt-5">
+        09. If 3D printing is free*
+      </h4>
+
+      <div class="row">
+        <div class="col-6 col-lg-3 text-left">
+          非常不符合
+        </div>
+        <div class="col-6 col-lg-3 text-right">
+          非常符合
+        </div>
+      </div>
+      <p class="subq">I will design my own products to print</p>
+      <div class="btn-group btn-group-toggle" data-toggle="buttons">
+        <label class="btn btn-secondary">
+          <input type="radio" name="q91" id="q911" autocomplete="off" value="q911"> <span>1</span>
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="q91" id="q912" autocomplete="off" value="q912"> <span>2</span>
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="q91" id="q913" autocomplete="off" value="q913"> <span>3</span>
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="q91" id="q914" autocomplete="off" value="q914"> <span>4</span>
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="q91" id="q915" autocomplete="off" value="q915"> <span>5</span>
+        </label>
+      </div>
+
+      <p class="subq">I may buy creative prints from artists</p>
+      <div class="btn-group btn-group-toggle" data-toggle="buttons">
+        <label class="btn btn-secondary">
+          <input type="radio" name="q92" id="q921" autocomplete="off" value="q921"> <span>1</span>
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="q92" id="q922" autocomplete="off" value="q922"> <span>2</span>
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="q92" id="q923" autocomplete="off" value="q923"> <span>3</span>
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="q92" id="q924" autocomplete="off" value="q924"> <span>4</span>
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="q92" id="q925" autocomplete="off" value="q925"> <span>5</span>
+        </label>
+      </div>
+
+      <h4 class="mt-5">
+        10. 3D Printing Kiosk should be available in (multiple responses)
+      </h4>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="checkbox mb-md-2">
+            <label>
+              <input type="checkbox" name="q10" id="q10_1" value="library"> Public Libraries
+            </label>
+          </div>
+          <div class="checkbox mb-md-2">
+            <label><input type="checkbox" name="q10" id="q10_2" value="school"> Schools
+            </label>
+          </div>
+          <div class="checkbox mb-md-2">
+            <label>
+              <input type="checkbox" name="q10" id="q10_3" value="museum"> Museums
+            </label>
+          </div>
+          <div class="checkbox mb-md-2">
+            <label>
+              <input type="checkbox" name="q10" id="q10_4" value="tourist"> Touristic Spots
+            </label>
+          </div>
+          <div class="checkbox mb-md-2">
+            <label>
+              <input type="checkbox" name="q10" id="q10_5" value="parks"> Parks
+            </label>
+          </div>
+          <div class="form-group">
+            <label for="q10other" class="bmd-label-floating">Others</label>
+            <input type="text" class="form-control" id="q10other" name="q10other">
+            <span class="bmd-help">Please specify...</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <hr class="mt-5">
+          <button id="submit" type="submit" class="btn btn-primary btn-raised">Submit</button>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+  </script>
+  <script src="https://unpkg.com/popper.js@1.12.6/dist/umd/popper.js"
+    integrity="sha384-fA23ZRQ3G/J53mElWqVJEGJzU0sTs+SvzG8fXVWP+kJQ1lwFAOkcUOysnlKJC33U" crossorigin="anonymous">
+  </script>
+  <script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js"
+    integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous">
+  </script>
+
+  <script src="scripts/sketch.js"></script>
+  <script>
+    $(document).ready(function () {});
+  </script>
+</body>
+
+</html>

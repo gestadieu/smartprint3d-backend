@@ -1,0 +1,26 @@
+ .btn-group-toggle label {
+   font-size: 1.1em;
+ }
+
+ .btn-group-toggle input {
+   display: none;
+ }
+
+ .btn-group-toggle label span {
+   padding: 0px 30px 0px 30px;
+ }
+
+ .radio {
+   margin-bottom: 10px;
+ }
+
+ @media (max-width: 575.98px) {
+   .btn-group-toggle label span {
+     padding: 0px 10px 0px 10px;
+   }
+ }
+
+ .subq {
+   margin-bottom: -10px;
+   margin-top: 30px;
+ }

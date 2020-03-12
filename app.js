@@ -4,9 +4,6 @@ const Datastore = require('nedb');
 const readline = require('readline');
 const fs = require('fs');
 
-// const pug = require('pug');
-// app.set('view engine', pug);
-
 app.use(express.static('public'));
 app.use(express.json({
   limit: '1mb'
@@ -29,7 +26,7 @@ app.post('/api', (request, response) => {
   const data = request.body;
 
   // make sure we always have an array 
-  ['medium', 'input', 'output', 'sociali', 'museum'].forEach(elt => {
+  ['q10'].forEach(elt => {
     if (typeof data[elt] === 'string') {
       data[elt] = [data[elt]];
     }
@@ -37,6 +34,8 @@ app.post('/api', (request, response) => {
       data[elt] = [];
     }
   });
+  // checkbox + others text input
+
 
   // save data ind db and send back
   db.insert(data);
