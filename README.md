@@ -17,7 +17,7 @@ npm install
 Run dev mode
 
 ```javascript
-nodemon app.js
+npm run dev
 ```
 
 then you can connect to [localhost:8082!](http://localhost:8082/) 
