@@ -21,3 +21,7 @@ npm run dev
 ```
 
 then you can connect to [localhost:8082!](http://localhost:8082/) 
+
+TODO?
+- [ ] use mongoose-nedb https://github.com/aerys/mongoose-nedb https://mongoosejs.com/ 
+- [ ] use Google Spreadsheet https://www.npmjs.com/package/google-spreadsheet

@@ -20,7 +20,9 @@
   "homepage": "https://github.com/gestadieu/smartprint3d-backend#readme",
   "dependencies": {
     "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "google-spreadsheet": "^3.0.9",
     "nedb": "^1.8.0"
   },
   "devDependencies": {

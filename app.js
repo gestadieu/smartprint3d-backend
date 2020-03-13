@@ -3,6 +3,11 @@ const app = express();
 const Datastore = require('nedb');
 const readline = require('readline');
 const fs = require('fs');
+require('dotenv').config();
+
+const {
+  GoogleSpreadsheet
+} = require('google-spreadsheet');
 
 app.use(express.static('public'));
 app.use(express.json({
@@ -17,6 +22,21 @@ const db = new Datastore({
   timestampData: true
 });
 db.loadDatabase();
+
+(async () => {
+  const doc = new GoogleSpreadsheet('1qKvV94FfXvcdmPa_hxlNTZW--lXOcKhrReSApHRXC5Q');
+
+  // const creds = require('smartprint3d-phase-i-5542a15f36a9.json');
+  // await doc.useServiceAccountAuth(creds);
+  await doc.useServiceAccountAuth({
+    client_email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
+    private_key: process.env.GOOGLE_PRIVATE_KEY,
+  });
+
+  await doc.loadInfo();
+  console.log(doc.title);
+})();
+
 
 const port = process.env.PORT || 8082;
 app.listen(port, () => console.log(`Server running on port ${port}`));
