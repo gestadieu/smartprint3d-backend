@@ -1,14 +1,16 @@
 const express = require('express');
-const app = express();
 const Datastore = require('nedb');
 const readline = require('readline');
+const path = require('path');
 const fs = require('fs');
 require('dotenv').config();
 
 const {
-  GoogleSpreadsheet
-} = require('google-spreadsheet');
+  PreSurvey
+} = require('./googleSheetsService');
 
+
+const app = express();
 app.use(express.static('public'));
 app.use(express.json({
   limit: '1mb'
@@ -22,20 +24,6 @@ const db = new Datastore({
   timestampData: true
 });
 db.loadDatabase();
-
-(async () => {
-  const doc = new GoogleSpreadsheet('1qKvV94FfXvcdmPa_hxlNTZW--lXOcKhrReSApHRXC5Q');
-
-  // const creds = require('smartprint3d-phase-i-5542a15f36a9.json');
-  // await doc.useServiceAccountAuth(creds);
-  await doc.useServiceAccountAuth({
-    client_email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
-    private_key: process.env.GOOGLE_PRIVATE_KEY,
-  });
-
-  await doc.loadInfo();
-  console.log(doc.title);
-})();
 
 
 const port = process.env.PORT || 8082;
@@ -57,8 +45,12 @@ app.post('/api', (request, response) => {
   // checkbox + others text input
 
 
-  // save data ind db and send back
+  // save data ind db
   db.insert(data);
+  // save data in Google Spreadsheet
+  const s = new PreSurvey();
+  s.addRows(data);
+
   response.json(data);
 });
 
