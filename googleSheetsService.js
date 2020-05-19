@@ -1,18 +1,14 @@
-require('dotenv').config();
-const {
-  google
-} = require('googleapis');
+require("dotenv").config();
+const { google } = require("googleapis");
 
-const SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
+const SCOPES = ["https://www.googleapis.com/auth/spreadsheets"];
 
-const sheets = google.sheets('v4');
-
+const sheets = google.sheets("v4");
 
 class PreSurvey {
-
   constructor() {
     this.spreadsheetId = process.env.SPREADSHEET_ID;
-    this.sheetName = 'PreSurvey'; //process.env.SHEET_NAME;
+    this.sheetName = "PreSurvey"; //process.env.SHEET_NAME;
   }
   // set name(name) {
   //   this._name = name.charAt(0).toUpperCase() + name.slice(1);
@@ -23,7 +19,7 @@ class PreSurvey {
 
   async authToken() {
     const auth = new google.auth.GoogleAuth({
-      scopes: SCOPES
+      scopes: SCOPES,
     });
     const authToken = await auth.getClient();
     return authToken;
@@ -37,7 +33,7 @@ class PreSurvey {
         spreadsheetId: this.spreadsheetId,
         auth,
         range: this.sheetName,
-        valueInputOption: 'USER_ENTERED',
+        valueInputOption: "USER_ENTERED",
         requestBody: {
           values: [a],
         },
@@ -48,35 +44,88 @@ class PreSurvey {
     }
   }
 
+  // async getRows(range) {
+  //   try {
+  //     sheets.spreadsheets.values.get({
+  //         auth: auth,
+  //         spreadsheetId: this.spreadsheetId,
+  //         range: 'Class Data!A2:E',
+  //       },
+  //       (err, res) => {
+  //         if (err) {
+  //           console.error('The API returned an error.');
+  //           throw err;
+  //         }
+  //         const rows = res.data.values;
+  //         if (rows.length === 0) {
+  //           console.log('No data found.');
+  //         } else {
+  //           console.log('Name, Major:');
+  //           for (const row of rows) {
+  //             // Print columns A and E, which correspond to indices 0 and 4.
+  //             console.log(`${row[0]}, ${row[4]}`);
+  //           }
+  //         }
+  //       }
+  //     );
+  //   } catch (err) {
+
+  //   }
+  // }
+
   dataToArray(data) {
-    const questions = ['q1', 'q2', 'q3', 'q4', 'q51', 'q52', 'q53', 'q54', 'q55', 'q56', , 'q57', 'q6', , 'q7', , 'q8', , 'q91', 'q92', 'q10']; //, 'q10other'];
-    let a = ['phonenb', 'email'];
-    questions.forEach(el => {
-      if (el in data && el == 'q10') {
+    const now = new Date();
+    const questions = [
+      "q1",
+      "q2",
+      "q3",
+      "q4",
+      "q51",
+      "q52",
+      "q53",
+      "q54",
+      "q55",
+      "q56",
+      "q57",
+      "q6",
+      "q7",
+      "q8",
+      "q91",
+      "q92",
+      "q10",
+    ]; //, 'q10other'];
+    let a = [
+      data._id,
+      now.toString(),
+      data.mobile,
+      data.email,
+      data.cartItemsId,
+      data.cartItemsQuantity,
+    ];
+
+    questions.forEach((el) => {
+      if (el in data && el == "q10") {
         let tp = data.q10.toString();
-        tp += ('q10other' in data) ? ',' + data.q10other : '';
+        tp += "q10other" in data ? "," + data.q10other : "";
         a.push(tp);
       } else {
-        a.push((el in data) ? data[el] : '')
+        a.push(el in data ? data[el] : "");
       }
-    })
+    });
+    // console.log(a);
     return a;
   }
 }
 
-
 async function getAuthToken() {
   const auth = new google.auth.GoogleAuth({
-    scopes: SCOPES
+    scopes: SCOPES,
   });
   const authToken = await auth.getClient();
   return authToken;
 }
 
-async function getSpreadSheet({
-  spreadsheetId,
-  auth
-}) {
+async function getSpreadSheet({ spreadsheetId, auth }) {
   const res = await sheets.spreadsheets.get({
     spreadsheetId,
     auth,
@@ -84,31 +133,22 @@ async function getSpreadSheet({
   return res;
 }
 
-async function getSpreadSheetValues({
-  spreadsheetId,
-  auth,
-  sheetName
-}) {
+async function getSpreadSheetValues({ spreadsheetId, auth, sheetName }) {
   const res = await sheets.spreadsheets.values.get({
     spreadsheetId,
     auth,
-    range: sheetName
+    range: sheetName,
   });
   return res;
 }
 
-async function addRows({
-  spreadsheetId,
-  auth,
-  sheetName,
-  rows
-}) {
+async function addRows({ spreadsheetId, auth, sheetName, rows }) {
   const range = sheetName;
   const res = await sheets.spreadsheets.values.append({
     spreadsheetId,
     auth,
     range,
-    valueInputOption: 'USER_ENTERED',
+    valueInputOption: "USER_ENTERED",
     requestBody: {
       values: rows,
     },
@@ -117,7 +157,6 @@ async function addRows({
   return res.data;
 }
 
-
 module.exports = {
-  PreSurvey
-}
+  PreSurvey,
+};
