@@ -112,8 +112,7 @@ class PreSurvey {
         a.push(el in data ? data[el] : "");
       }
     });
-    // console.log(a);
-    a.push(`${data.url_api}/delivering/${data._id}`);
+    // a.push(`${data.url_api}/delivering/${data._id}`);
     return a;
   }
 }

@@ -52,7 +52,7 @@ app.post("/api", (request, response) => {
     const url_api = `${request.protocol}://${host}/api`;
     const url_postsurvey = `${url_api}/${doc._id}`;
 
-    doc.url_api = url_api;
+    // doc.url_api = url_api;
     // save data in Google Spreadsheet
     const s = new PreSurvey();
     s.addRows(doc);
@@ -88,7 +88,19 @@ app.get("/api/:id", (request, response) => {
   );
 });
 
-app.get("/api/delivering/:id", (request, response) => {});
+// app.get("/api/delivering/:id", (request, response) => {
+//   db.findOne(
+//     {
+//       _id: request.params.id,
+//     },
+//     (err, doc) => {
+//       if (err) {
+//         response.redirect(404, "/404.html");
+//       }
+//       response.json(doc);
+//     }
+//   );
+// });
 
 app.get("/api", (request, response) => {
   db.find({}, (err, docs) => {
