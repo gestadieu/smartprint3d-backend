@@ -52,7 +52,7 @@ app.post("/api", (request, response) => {
     s.addRows(doc);
   });
 
-  response.json({});
+  response.json({ status: "success" });
 });
 
 /* 
