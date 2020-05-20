@@ -6,13 +6,16 @@ Backend for the SmartPrint3D.io application and reserarch project
 - [x] API
 - [x] use Google API for google-spreadsheet
 - [ ] Post-survey form
-- [ ] QR Code generator
-- [ ] Send email to smartprint3d.io@gmail.com
+- [x] QR Code generator on order
+- [ ] API to access the post-survey with QRCode
+- [ ] Send email to smartprint3d.io@gmail.com upon order validation
+- [ ] Send email to customer from Google Spreadsheet once object printed
+- [ ] Post-survey: display order information as well
 - [x] Integration with the _shop_
-- [ ] form validation (required fields)
-- [ ] use of webcomponents for likert and checkbox+other (on client side...)
+- [x] form validation (required fields)
 - [ ] Tests and security
-- [ ] use mongoose-nedb https://github.com/aerys/mongoose-nedb https://mongoosejs.com/
+- [ ] SSL for API
+- [ ] use mongoose-nedb to migrate to mongodb? https://github.com/aerys/mongoose-nedb https://mongoosejs.com/
 
 Installation
 
