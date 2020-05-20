@@ -5,6 +5,7 @@ const readline = require("readline");
 const path = require("path");
 const fs = require("fs");
 require("dotenv").config();
+const QRCode = require("qrcode");
 
 const { PreSurvey } = require("./googleSheetsService");
 
@@ -50,11 +51,34 @@ app.post("/api", (request, response) => {
     // save data in Google Spreadsheet
     const s = new PreSurvey();
     s.addRows(doc);
-  });
 
-  response.json({ status: "success" });
+    const url = `${request.protocol}://${request.get("host")}/api/${doc._id}`;
+    const QRC = async (id) => {
+      try {
+        // const qrcode = await qrcode.toDataURL(url));
+        await QRCode.toFile(`public/qrcodes/${id}.png`, url, { type: "png" });
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    QRC(doc._id);
+    response.json({ status: "success", qrcode: url });
+  });
 });
 
+app.get("/api/:id", (request, response) => {
+  db.findOne(
+    {
+      _id: request.params.id,
+    },
+    (err, doc) => {
+      if (err) {
+        response.redirect(404, "/404.html");
+      }
+      response.redirect(200, `/postsurvey.html?id=${doc._id}`);
+    }
+  );
+});
 /* 
   Export database to a csv format 
 */
@@ -180,17 +204,6 @@ app.get("/api", (request, response) => {
       };
       response.json(rs);
     });
-});
-
-app.get("/api/:id", (request, response) => {
-  db.findOne(
-    {
-      _id: request.params.id,
-    },
-    (err, doc) => {
-      response.json(doc);
-    }
-  );
 });
 
 /*

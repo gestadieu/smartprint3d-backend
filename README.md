@@ -6,6 +6,8 @@ Backend for the SmartPrint3D.io application and reserarch project
 - [x] API
 - [x] use Google API for google-spreadsheet
 - [ ] Post-survey form
+- [ ] QR Code generator
+- [ ] Send email to smartprint3d.io@gmail.com
 - [x] Integration with the _shop_
 - [ ] form validation (required fields)
 - [ ] use of webcomponents for likert and checkbox+other (on client side...)
