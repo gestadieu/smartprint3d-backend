@@ -49,11 +49,10 @@ app.post("/api", (request, response) => {
   // save data ind db
   db.insert(data, (err, doc) => {
     const host = request.get("host");
-    const url_postsurvey = `${request.protocol}://${host}/api/${doc._id}`;
-    const url_qrcode = `${request.protocol}://${host}/qrcodes/${doc._id}.png`;
+    const url_api = `${request.protocol}://${host}/api`;
+    const url_postsurvey = `${url_api}/${doc._id}`;
 
-    doc.url = url_postsurvey;
-    doc.url_qrcode = url_qrcode;
+    doc.url_api = url_api;
     // save data in Google Spreadsheet
     const s = new PreSurvey();
     s.addRows(doc);

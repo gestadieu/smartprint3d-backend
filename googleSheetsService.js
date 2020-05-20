@@ -113,6 +113,7 @@ class PreSurvey {
       }
     });
     // console.log(a);
+    a.push(`${data.url_api}/delivering/${data._id}`);
     return a;
   }
 }
