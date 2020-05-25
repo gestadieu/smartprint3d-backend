@@ -93,6 +93,7 @@ class PreSurvey {
       "q91",
       "q92",
       "q10",
+      "STATUS",
     ]; //, 'q10other'];
     let a = [
       data._id,
@@ -112,7 +113,16 @@ class PreSurvey {
         a.push(el in data ? data[el] : "");
       }
     });
-    // a.push(`${data.url_api}/delivering/${data._id}`);
+    a.push(
+      `=HYPERLINK("${data.url_api}/status/${data._id}/printing","PRINTING")`
+    );
+    a.push(
+      `=HYPERLINK("${data.url_api}/status/${data._id}/printed","PRINTED")`
+    );
+    a.push(
+      `=HYPERLINK("${data.url_api}/status/${data._id}/delivered","DELIVERED")`
+    );
+
     return a;
   }
 }

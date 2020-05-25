@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "NODE_ENV=test ./node_modules/mocha/bin/mocha spec/index.js",
+    "docs": "./node_modules/.bin/jsdoc -c jsdoc.json"
   },
   "repository": {
     "type": "git",
@@ -19,14 +20,25 @@
   },
   "homepage": "https://github.com/gestadieu/smartprint3d-backend#readme",
   "dependencies": {
+    "admin-bro": "^2.4.2",
+    "admin-bro-expressjs": "^2.0.5",
+    "admin-bro-mongoose": "^0.5.2",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "express-formidable": "^1.2.0",
+    "express-jwt": "^5.3.3",
+    "google-spreadsheet": "^3.0.11",
     "googleapis": "^48.0.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.9.15",
     "nedb": "^1.8.0",
     "qrcode": "^1.4.4"
   },
   "devDependencies": {
+    "chai": "^4.2.0",
+    "jsdoc": "^3.6.4",
+    "mocha": "^7.2.0",
     "nodemon": "^2.0.2"
   }
 }
