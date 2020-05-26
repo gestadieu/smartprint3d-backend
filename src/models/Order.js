@@ -44,14 +44,14 @@ const OrderSchema = new Schema({
   postsurvey: {},
   status: {
     type: String,
-    // required: true,
+    required: true,
     default: "ORDERED",
     enum: ["ORDERED", "PRINTING", "PRINTED", "DELIVERED"],
   },
+  created_at: { type: Date, default: Date.now },
+  updated_at: { type: Date, default: Date.now },
 });
 
-let Order = (module.exports = mongoose.model("Order", OrderSchema));
+const Order = mongoose.model("Order", OrderSchema);
 
-module.exports.get = function (callback, limit) {
-  Order.find(callback).limit(limit);
-};
+module.exports = { OrderSchema, Order };

@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
 const SurveySchema = new Schema({
-  OrderId: "",
+  order: { type: Schema.Types.ObjectId, ref: "Order" },
   presurvey: {
     q1: String,
     q2: String,
@@ -22,7 +22,7 @@ const SurveySchema = new Schema({
     q92: Number,
     q10: Array,
   },
-  // postsurvey: {},
+  postsurvey: {},
 });
 
 module.exports = mongoose.model("Survey", SurveySchema);

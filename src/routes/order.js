@@ -1,15 +1,8 @@
 const router = require("express").Router();
-const Order = require("../models/Order");
-const { PreSurvey } = require("../models/googleSheetsService");
+const { Order } = require("../models/Order");
+const Survey = require("../models/Survey");
+// const { PreSurvey } = require("../models/googleSheetsService");
 const QRCode = require("qrcode");
-const { expect } = require("chai");
-
-// const Datastore = require("nedb");
-// const db = new Datastore({
-//   filename: "database.db",
-//   timestampData: true,
-// });
-// db.loadDatabase();
 
 const STATUS_FLAGS = ["ORDERED", "PRINTING", "PRINTED", "DELIVERED"];
 
@@ -55,6 +48,12 @@ router.post("/orders", async (request, response) => {
     const order = new Order(data);
     await order.save();
 
+    const survey = new Survey({
+      order: order._id,
+      presurvey: data.presurvey,
+    });
+    await survey.save();
+
     const host = request.get("host");
     const url_api = `${request.protocol}://${host}/api`;
     const url_postsurvey = `${url_api}/${order._id}`;
@@ -69,6 +68,7 @@ router.post("/orders", async (request, response) => {
     });
     response.json({ status: "success", order });
   } catch (error) {
+    console.log(error);
     response.status(400).send({ status: "error", message: error });
   }
 });

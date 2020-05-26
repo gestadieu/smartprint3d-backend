@@ -28,11 +28,8 @@
     "express": "^4.17.1",
     "express-formidable": "^1.2.0",
     "express-jwt": "^5.3.3",
-    "google-spreadsheet": "^3.0.11",
-    "googleapis": "^48.0.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.15",
-    "nedb": "^1.8.0",
     "qrcode": "^1.4.4"
   },
   "devDependencies": {
