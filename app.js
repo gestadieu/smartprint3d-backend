@@ -1,6 +1,12 @@
 require("dotenv").config();
 var path = require("path");
 const express = require("express");
+const session = require("express-session");
+const cookieParser = require("cookie-parser");
+const passport = require("passport");
+const LocalStrategy = require("passport-local").Strategy;
+const User = require("./src/models/User");
+const flash = require("connect-flash");
 const https = require("https");
 const http = require("http");
 const fs = require("fs");
@@ -9,6 +15,9 @@ const cors = require("cors");
 const orderRoute = require("./src/routes/order");
 const adminRoute = require("./src/routes/admin");
 const surveyRoute = require("./src/routes/survey");
+const authRoute = require("./src/routes/auth");
+
+var helmet = require("helmet");
 
 // var options = {
 //   key: fs.readFileSync("/etc/ssl/letsencrypt/smartprint3d.io.key"),
@@ -20,6 +29,19 @@ const port = 8082;
 const ssl_port = 443;
 
 app.use(cors());
+
+app.use(cookieParser());
+app.use(
+  session({
+    secret: "LoxodontaElephasMammuthusPalaeoloxodonPrimelephas",
+    keys: ["secretkey1", "secretkey2", "fdasfqwrenksdgjlh"],
+    cookie: {},
+    resave: false,
+    saveUninitialized: false,
+  })
+);
+app.use(flash());
+
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "pug");
 app.use(express.static("public"));
@@ -33,9 +55,24 @@ app.use(
     extended: true,
   })
 );
+
+// if (app.get("env") === "production") {
+//   // Serve secure cookies, requires HTTPS
+//   session.cookie.secure = true;
+// }
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.use(User.createStrategy());
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+app.use(helmet());
+
 app.use("/api", orderRoute);
 app.use("/admin", adminRoute);
 app.use(surveyRoute);
+app.use(authRoute);
 
 const run = async () => {
   await mongoose.connect(process.env.MONGODB_URL, {

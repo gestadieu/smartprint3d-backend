@@ -1,0 +1,21 @@
+/* body {
+  background-color: #ECF0F3;
+} */
+
+nav.navbar {
+  border-top: 4px solid #3ec46d;
+  margin-bottom: 1rem;
+}
+
+.navbar-item {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.info-tiles {
+  margin: 1rem 0;
+}
+
+td.timeline {
+  font-size: .60rem;
+}

@@ -4,29 +4,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>SmartPrint3D Admin Panel - Orders</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.2/css/bulma.min.css">
-    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-    link(rel="stylesheet", href="/styles/admin.css")
+    include _head.pug
   </head>
-  <body>
-  <nav class="navbar is-danger" role="navigation" aria-label="main navigation">
-  <div class="navbar-brand">
-    <a class="navbar-item" href="http://smartprint3d.io:8082/admin">
-      <img src="/images/logo-smartprint3d.jpg" alt="SmartPrint3D.io" height="28">
-    </a>
+  <body style="background: #ECF0F3; height:100%">
+    include _nav.pug
 
-    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-    </a>
-  </div>
-</nav>
-  <section class="section">
     <div class="container">
       <h1 class="title">#{title} Orders</h1>
-    </div>
-    <div class="container">
+    
       table(class="table is-striped is-fullwidth is-narrow")
         thead
           tr
@@ -34,7 +19,8 @@
             th Order 
             th Status 
             th(colspan="2") Timeline
-            th Action
+            if page != 'all'
+              th Action
         tbody
           each order in orders
             tr
@@ -49,37 +35,36 @@
                   span #{it.qty} x 
                   span #{it.item} 
                   br
-
               td
-                if order.status == 'ORDERED'
-                  span(class="tag is-black")=order.status
-                else if order.status == 'PRINTING'
-                  span(class="tag")=order.status
-                else if order.status == 'PRINTED'
-                  span(class="tag is-info")=order.status
-                else if order.status == 'DELIVERED'
-                  span(class="tag is-success")=order.status  
+                p(class="field")
+                  if order.status == 'ORDERED'
+                    span(class="tag is-black")=order.status
+                  else if order.status == 'PRINTING'
+                    span(class="tag")=order.status
+                  else if order.status == 'PRINTED'
+                    span(class="tag is-info")=order.status
+                  else if order.status == 'DELIVERED'
+                    span(class="tag is-success")=order.status  
               
-              td(class="is-size-7")
+              td(class="timeline")
                 each ti in order.timeline 
                   span(class=(ti.status == 'ORDERED')? "has-text-black":(ti.status == 'PRINTING')?"has-text-dark":(ti.status == 'PRINTED')?"has-text-info":"has-text-success") #{ti.status} 
                   br
-              td(class="is-size-7")
+              td(class="timeline")
                 each ti in order.timeline 
                   on
                   span #{ti.date.toDateString()} #{ti.date.getHours()}:#{ti.date.getMinutes()}
                   br
-
-              td
-                if order.status == 'ORDERED'
-                  a(href=url_api + order._id +"/flag/printing" class="button is-light is-small") PRINTING
-                else if order.status == 'PRINTING'
-                  a(href=url_api + order._id +"/flag/printed" class="button is-light is-small") PRINTED
-                //- else if order.status == 'PRINTED'
-                //-   a(href=url_api + order._id +"/flag/delivered" class="button is-light is-small") DELIVERING
+              if page != 'all'
+                td
+                  if order.status == 'ORDERED'
+                    a(href=url_api + order._id +"/flag/printing" class="button is-light is-small") PRINTING
+                  else if order.status == 'PRINTING'
+                    a(href=url_api + order._id +"/flag/printed" class="button is-light is-small") PRINTED
+                  else if order.status == 'PRINTED'
+                    a(href=url_api + order._id +"/flag/delivered" class="button is-light is-small") DELIVERING
                  
     </div>
-
-  </section>
+    include _footer.pug
   </body>
 </html>

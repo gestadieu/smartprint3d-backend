@@ -21,6 +21,8 @@
   "homepage": "https://github.com/gestadieu/smartprint3d-backend#readme",
   "dependencies": {
     "bulma": "^0.8.2",
+    "connect-ensure-login": "^0.1.1",
+    "connect-flash": "^0.1.1",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
@@ -28,10 +30,12 @@
     "express-formidable": "^1.2.0",
     "express-jwt": "^5.3.3",
     "express-session": "^1.17.1",
+    "helmet": "^3.22.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.15",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
+    "passport-local-mongoose": "^6.0.1",
     "pug": "^3.0.0",
     "qrcode": "^1.4.4"
   },
