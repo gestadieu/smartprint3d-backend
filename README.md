@@ -33,4 +33,9 @@ npm run dev
 then you can connect to [localhost:8082!](http://localhost:8082/)
 
 Resources
+https https://stackoverflow.com/questions/5998694/how-to-create-an-https-server-in-node-js
+openssl genrsa -out client-key.pem 2048
+openssl req -new -key client-key.pem -out client.csr
+openssl x509 -req -in client.csr -signkey client-key.pem -out client-cert.pem
+
 https://medium.com/swlh/jwt-authentication-authorization-in-nodejs-express-mongodb-rest-apis-2019-ad14ec818122
