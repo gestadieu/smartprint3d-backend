@@ -23,6 +23,8 @@ const SurveySchema = new Schema({
     q10: Array,
   },
   postsurvey: {},
+  created_at: { type: Date, default: Date.now },
+  updated_at: { type: Date, default: Date.now },
 });
 
 module.exports = mongoose.model("Survey", SurveySchema);
