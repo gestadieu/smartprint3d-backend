@@ -1,18 +1,18 @@
 require("dotenv").config();
+var path = require("path");
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-const orderRouter = require("./src/routes/order");
-const { default: AdminBro } = require("admin-bro");
-const adminOptions = require("./src/admin/admin.options");
-const buildAdminRouter = require("./src/admin/admin.router");
-const AdminBroExpress = require("admin-bro-expressjs");
-const AdminBroMongoose = require("admin-bro-mongoose");
+const orderRoute = require("./src/routes/order");
+const adminRoute = require("./src/routes/admin");
+const surveyRoute = require("./src/routes/survey");
 
 const app = express();
 const port = 8082;
 
 app.use(cors());
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "pug");
 app.use(express.static("public"));
 app.use(
   express.json({
@@ -30,10 +30,12 @@ const run = async () => {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   });
-  const admin = new AdminBro(adminOptions);
-  const adminRouter = buildAdminRouter(admin);
-  app.use(admin.options.rootPath, adminRouter);
-  app.use("/api", orderRouter);
+  // const admin = new AdminBro(adminOptions);
+  // const adminRouter = buildAdminRouter(admin);
+  // app.use(admin.options.rootPath, adminRouter);
+  app.use("/api", orderRoute);
+  app.use("/admin", adminRoute);
+  app.use(surveyRoute);
 
   app.listen(port, () => console.log(`listening on port ${port}`));
 };
