@@ -24,6 +24,7 @@ router.get("/", async (request, response) => {
     total_orders,
     active_orders,
     objects: nb_objects[0].totalSize,
+    user: request.user,
   });
 });
 
