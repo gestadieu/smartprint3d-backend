@@ -10,7 +10,7 @@ block content
         th Order 
         th Status 
         th(colspan="2") Timeline
-        if page != 'all'
+        if page != 'past'
           th Action
     tbody
       each order in orders
@@ -46,10 +46,10 @@ block content
               on
               span #{ti.date.toDateString()} #{ti.date.getHours()}:#{ti.date.getMinutes()}
               br
-          if page != 'all'
+          if page != 'past'
             td(class="actions")
               if order.status == 'ORDERED'
-                a(href=url_api + order._id +"/flag/printing" class="button is-light is-small") PRINTING
+                a(href=url_api + order._id +"/flag/printing" class="button is-light is-small") PRINTING 
               else if order.status == 'PRINTING'
                 a(href=url_api + order._id +"/flag/printed" class="button is-light is-small") PRINTED
               else if order.status == 'PRINTED'

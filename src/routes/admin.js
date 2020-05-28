@@ -49,15 +49,17 @@ router.get("/orders", async (request, response) => {
   }
 });
 
-router.get("/allorders", async (request, response) => {
+router.get("/pastorders", async (request, response) => {
   const url_api = `${request.protocol}://${request.headers.host}${request.originalUrl}/`;
   try {
-    const orders = await Order.find().sort({ created_at: -1 });
+    const orders = await Order.find({ status: "DELIVERED" }).sort({
+      created_at: -1,
+    });
     response.render("admin_orders_list", {
       orders,
       url_api,
-      title: "All Orders",
-      page: "all",
+      title: "Orders Completed",
+      page: "past",
     });
   } catch (error) {
     response.status(400).send({ status: "error", message: error });

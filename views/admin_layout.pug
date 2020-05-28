@@ -26,9 +26,15 @@
           <div id="navMenu" class="navbar-menu">
             <div class="navbar-start">
               <a class="navbar-item" href="/admin">Dashboard</a>
-              <a class="navbar-item" href="/admin/orders">Active Orders</a>
-              <a class="navbar-item" href="/admin/allorders">All Orders</a>
-              <a class="navbar-item" href="">Surveys</a>
+              
+              <div class="navbar-item has-dropdown is-hoverable">
+                <a class="navbar-link">Orders</a>
+                <div class="navbar-dropdown">
+                  <a class="navbar-item" href="/admin/orders">Active Orders</a>
+                  <a class="navbar-item" href="/admin/pastorders">Completed Orders</a>
+                </div>
+              </div>
+              //- <a class="navbar-item" href="">Surveys</a>
               <a class="navbar-item" href="/admin/users">Users</a>
             </div>
             <div class="navbar-end">
