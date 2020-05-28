@@ -1,6 +1,7 @@
-/* body {
+body {
   background-color: #ECF0F3;
-} */
+  height: 100%;
+}
 
 nav.navbar {
   border-top: 4px solid #3ec46d;
@@ -18,4 +19,8 @@ nav.navbar {
 
 td.timeline {
   font-size: .60rem;
+}
+
+td.actions .tags {
+  justify-content: flex-end;
 }

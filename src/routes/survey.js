@@ -7,4 +7,8 @@ router.get("/postsurvey/:id", async (request, response) => {
   response.render("postsurvey", { order });
 });
 
+router.post("/postsurvey", async (request, response) => {
+  response.render("thankyou");
+});
+
 module.exports = router;

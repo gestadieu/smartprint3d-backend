@@ -1,70 +1,57 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>SmartPrint3D Admin Panel - Orders</title>
-    include _head.pug
-  </head>
-  <body style="background: #ECF0F3; height:100%">
-    include _nav.pug
+extends admin_layout.pug
 
-    <div class="container">
-      <h1 class="title">#{title} Orders</h1>
+block content 
+  h1(class="title") #{title}
     
-      table(class="table is-striped is-fullwidth is-narrow")
-        thead
-          tr
-            th Contact 
-            th Order 
-            th Status 
-            th(colspan="2") Timeline
-            if page != 'all'
-              th Action
-        tbody
-          each order in orders
-            tr
-              td(class="is-size-7")
-                span #{order.email} 
-                if order.email
-                  br
-                span #{order.mobile}
+  table(class="table is-striped is-fullwidth is-narrow")
+    thead
+      tr
+        th Contact 
+        th Order 
+        th Status 
+        th(colspan="2") Timeline
+        if page != 'all'
+          th Action
+    tbody
+      each order in orders
+        tr
+          td(class="is-size-7")
+            span #{order.email} 
+            if order.email
+              br
+            span #{order.mobile}
 
-              td(class="is-size-7")
-                each it in order.items
-                  span #{it.qty} x 
-                  span #{it.item} 
-                  br
-              td
-                p(class="field")
-                  if order.status == 'ORDERED'
-                    span(class="tag is-black")=order.status
-                  else if order.status == 'PRINTING'
-                    span(class="tag")=order.status
-                  else if order.status == 'PRINTED'
-                    span(class="tag is-info")=order.status
-                  else if order.status == 'DELIVERED'
-                    span(class="tag is-success")=order.status  
-              
-              td(class="timeline")
-                each ti in order.timeline 
-                  span(class=(ti.status == 'ORDERED')? "has-text-black":(ti.status == 'PRINTING')?"has-text-dark":(ti.status == 'PRINTED')?"has-text-info":"has-text-success") #{ti.status} 
-                  br
-              td(class="timeline")
-                each ti in order.timeline 
-                  on
-                  span #{ti.date.toDateString()} #{ti.date.getHours()}:#{ti.date.getMinutes()}
-                  br
-              if page != 'all'
-                td
-                  if order.status == 'ORDERED'
-                    a(href=url_api + order._id +"/flag/printing" class="button is-light is-small") PRINTING
-                  else if order.status == 'PRINTING'
-                    a(href=url_api + order._id +"/flag/printed" class="button is-light is-small") PRINTED
-                  else if order.status == 'PRINTED'
-                    a(href=url_api + order._id +"/flag/delivered" class="button is-light is-small") DELIVERING
-                 
-    </div>
-    include _footer.pug
-  </body>
-</html>
+          td(class="is-size-7")
+            each it in order.items
+              span #{it.qty} x 
+              span #{it.item} 
+              br
+          td
+            p(class="field")
+              if order.status == 'ORDERED'
+                span(class="tag is-black")=order.status
+              else if order.status == 'PRINTING'
+                span(class="tag")=order.status
+              else if order.status == 'PRINTED'
+                span(class="tag is-info")=order.status
+              else if order.status == 'DELIVERED'
+                span(class="tag is-success")=order.status  
+          
+          td(class="timeline")
+            each ti in order.timeline 
+              span(class=(ti.status == 'ORDERED')? "has-text-black":(ti.status == 'PRINTING')?"has-text-dark":(ti.status == 'PRINTED')?"has-text-info":"has-text-success") #{ti.status} 
+              br
+          td(class="timeline")
+            each ti in order.timeline 
+              on
+              span #{ti.date.toDateString()} #{ti.date.getHours()}:#{ti.date.getMinutes()}
+              br
+          if page != 'all'
+            td(class="actions")
+              if order.status == 'ORDERED'
+                a(href=url_api + order._id +"/flag/printing" class="button is-light is-small") PRINTING
+              else if order.status == 'PRINTING'
+                a(href=url_api + order._id +"/flag/printed" class="button is-light is-small") PRINTED
+              else if order.status == 'PRINTED'
+                a(href=url_api + order._id +"/flag/delivered" class="button is-light is-small") DELIVERING
+

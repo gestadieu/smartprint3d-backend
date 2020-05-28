@@ -2,13 +2,13 @@ const router = require("express").Router();
 const passport = require("passport");
 const login = require("connect-ensure-login");
 const { Order } = require("../models/Order");
+const User = require("../models/User");
 
 router.all("/*", login.ensureLoggedIn("/login"), function (req, res, next) {
   next();
 });
 
 router.get("/", async (request, response) => {
-  console.log(request.user);
   const total_orders = await Order.countDocuments();
   const active_orders = await Order.countDocuments({
     status: { $ne: "DELIVERED" },
@@ -20,6 +20,7 @@ router.get("/", async (request, response) => {
   ]);
 
   response.render("dashboard", {
+    title: "Dashboard",
     total_orders,
     active_orders,
     objects: nb_objects[0].totalSize,
@@ -39,7 +40,7 @@ router.get("/orders", async (request, response) => {
     response.render("admin_orders_list", {
       orders,
       url_api,
-      title: "Active",
+      title: "Active Orders",
       page: "active",
     });
   } catch (error) {
@@ -54,7 +55,7 @@ router.get("/allorders", async (request, response) => {
     response.render("admin_orders_list", {
       orders,
       url_api,
-      title: "All",
+      title: "All Orders",
       page: "all",
     });
   } catch (error) {
@@ -76,6 +77,21 @@ router.get("/orders/:id/flag/:flag", async (request, response) => {
     response.redirect("/admin/orders");
   } catch (error) {
     console.log(error);
+    response.status(400).send({ status: "error", message: error });
+  }
+});
+
+/**
+ *
+ */
+router.get("/users", async (request, response) => {
+  try {
+    const users = await User.find();
+    response.render("admin_users_list", {
+      title: "Users",
+      users,
+    });
+  } catch (error) {
     response.status(400).send({ status: "error", message: error });
   }
 });

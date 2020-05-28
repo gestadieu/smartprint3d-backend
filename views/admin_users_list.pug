@@ -1,0 +1,38 @@
+extends admin_layout.pug
+
+block content
+  h1(class="title")
+  <h1 class="title">#{title}</h1>
+    
+    table(class="table is-striped is-fullwidth")
+      thead
+        tr
+          th User 
+          th Status 
+          th Roles 
+          th Action
+      tbody
+        each user in users
+          tr
+            td
+              span #{user.username}
+              if user.email
+                br
+              span(class="is-size-7") #{user.email}
+
+            td 
+              if user.active
+                span(class="tag is-primary") ACTIVE
+              else 
+               span(class="tag is-dark") DISABLE 
+              
+            td
+            
+            td(class="actions")
+              div(class="tags has-addons")
+                a(href="" class="tag is-light is-small") 
+                  if user.active
+                    span Disable
+                  else 
+                    span Activate
+                a(href="" class="tag is-danger is-small") Password 

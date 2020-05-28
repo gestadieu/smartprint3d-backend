@@ -1,1 +1,349 @@
-here is the postsurvey...
+extends layout.pug
+
+block content
+  <form id="survey" name="survey" action="/postsurvey" method="POST">
+    <div class="container">
+      <div class="py-5 text-center">
+        <h2>智打印3D Survey</h2>
+        <p class="lead">Pre-order perception and satisfaction of 3D Printing service and Macau as a smart city for local
+          residents and destination image for tourist.</p>
+      </div>
+
+      <h4 class="mt-5">01. Education*</h4>
+      <div class="radio">
+        <label> Primary or below <input type="radio" name="q1" id="q1y" value="primary"></label>
+      </div>
+      <div class="radio">
+        <label>Secondary<input type="radio" name="q1" id="q1n" value="secondary"></label>
+      </div>
+      <div class="radio">
+        <label>Bachelor degree<input type="radio" name="q1" id="q1n" value="bachelor"></label>
+      </div>
+      <div class="radio">
+        <label>Master and above<input type="radio" name="q1" id="q1n" value="master"></label>
+      </div>
+
+      <h4 class="mt-5">02. 您的年龄？</h4>
+      <div class="radio">
+        <label> 20岁及以下 <input type="radio" name="q2" id="q21" value="20岁及以下"></label>
+      </div>
+      <div class="radio">
+        <label> 21-25岁 <input type="radio" name="q2" id="q22" value="21-25岁"></label>
+      </div>
+      <div class="radio">
+        <label> 26-30岁 <input type="radio" name="q2" id="q23" value="26-30岁"></label>
+      </div>
+      <div class="radio">
+        <label> 31-40岁 <input type="radio" name="q2" id="q24" value="31-40岁"></label>
+      </div>
+      <div class="radio">
+        <label> 40岁及以上 <input type="radio" name="q2" id="q25" value="40岁及以上"></label>
+      </div>
+
+      <h4 class="mt-5">03. Place of Origin</h4>
+
+      <div class="form-group">
+        <!-- <label for="apparatus.country" class="bmd-label-floating">Country</label> -->
+        <select class="form-control custom-select d-block w-100" id="q3" name="q3">
+          <option value="">Country</option>
+          <option value="MO">Macao</option>
+          <option value="HK">Hong Kong</option>
+          <option value="CN">China</option>
+        </select>
+        <span class="bmd-help">
+          Please select a country.
+        </span>
+      </div>
+
+      <h4 class="mt-5">04. Occupation</h4>
+      <div class="radio">
+        <label> Student <input type="radio" name="q4" id="q41" value="student"></label>
+      </div>
+      <div class="radio">
+        <label> Housewife ??? <input type="radio" name="q4" id="q42" value="housewife"></label>
+      </div>
+      <div class="radio">
+        <label> Retired <input type="radio" name="q4" id="q43" value="retired"></label>
+      </div>
+      <div class="radio">
+        <label> Blue-collar ??? <input type="radio" name="q4" id="q44" value="bluecollar"></label>
+      </div>
+      <div class="radio">
+        <label> Self-Employed <input type="radio" name="q4" id="q45" value="selfemployed"></label>
+      </div>
+      <div class="radio">
+        <label> Management <input type="radio" name="q4" id="q46" value="management"></label>
+      </div>
+      <div class="radio">
+        <label> Unemployed <input type="radio" name="q4" id="q47" value="unemployed"></label>
+      </div>
+
+      <h4 class="mt-5">05. Which of the following describe well the image of Macau?</h4>
+      <div class="row">
+        <div class="col-6 col-lg-3 text-left">非常不符合</div>
+        <div class="col-6 col-lg-3 text-right">非常符合</div>
+      </div>
+
+      <p style="margin-bottom: -10px; margin-top: 30px">A city full of culture and history</p>
+      <div class="btn-group btn-group-toggle" data-toggle="buttons">
+        <label class="btn btn-secondary">
+          <input type="radio" name="q51" id="q511" autocomplete="off" value="1"> <span>1</span>
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="q51" id="q512" autocomplete="off" value="2"> <span>2</span>
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="q51" id="q513" autocomplete="off" value="3"> <span>3</span>
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="q51" id="q514" autocomplete="off" value="4"> <span>4</span>
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="q51" id="q515" autocomplete="off" value="5"> <span>5</span>
+        </label>
+      </div>
+
+      <p style="margin-bottom: -10px; margin-top: 30px">A city rich in different cuisines</p>
+      <div class="btn-group btn-group-toggle" data-toggle="buttons">
+        <label class="btn btn-secondary">
+          <input type="radio" name="q52" id="q521" autocomplete="off" value="1"> <span>1</span>
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="q52" id="q522" autocomplete="off" value="2"> <span>2</span>
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="q52" id="q523" autocomplete="off" value="3"> <span>3</span>
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="q52" id="q524" autocomplete="off" value="4"> <span>4</span>
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="q52" id="q525" autocomplete="off" value="5"> <span>5</span>
+        </label>
+      </div>
+
+      <p style="margin-bottom: -10px; margin-top: 30px">A city of entertainment (shows and festivals)</p>
+      <div class="btn-group btn-group-toggle" data-toggle="buttons">
+        <label class="btn btn-secondary">
+          <input type="radio" name="q53" id="q531" autocomplete="off" value="1"> <span>1</span>
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="q53" id="q532" autocomplete="off" value="2"> <span>2</span>
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="q53" id="q533" autocomplete="off" value="3"> <span>3</span>
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="q53" id="q534" autocomplete="off" value="4"> <span>4</span>
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="q53" id="q535" autocomplete="off" value="5"> <span>5</span>
+        </label>
+      </div>
+
+      <p style="margin-bottom: -10px; margin-top: 30px">A city of gaming</p>
+      <div class="btn-group btn-group-toggle" data-toggle="buttons">
+        <label class="btn btn-secondary">
+          <input type="radio" name="q54" id="q541" autocomplete="off" value="1"> <span>1</span>
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="q54" id="q542" autocomplete="off" value="2"> <span>2</span>
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="q54" id="q543" autocomplete="off" value="3"> <span>3</span>
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="q54" id="q544" autocomplete="off" value="4"> <span>4</span>
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="q54" id="q545" autocomplete="off" value="5"> <span>5</span>
+        </label>
+      </div>
+
+      <p style="margin-bottom: -10px; margin-top: 30px">A city of creativity and innovation</p>
+      <div class="btn-group btn-group-toggle" data-toggle="buttons">
+        <label class="btn btn-secondary">
+          <input type="radio" name="q55" id="q551" autocomplete="off" value="1"> <span>1</span>
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="q55" id="q552" autocomplete="off" value="2"> <span>2</span>
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="q55" id="q553" autocomplete="off" value="3"> <span>3</span>
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="q55" id="q554" autocomplete="off" value="4"> <span>4</span>
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="q55" id="q555" autocomplete="off" value="5"> <span>5</span>
+        </label>
+      </div>
+
+      <p style="margin-bottom: -10px; margin-top: 30px">A city for shopping</p>
+      <div class="btn-group btn-group-toggle" data-toggle="buttons">
+        <label class="btn btn-secondary">
+          <input type="radio" name="q56" id="q561" autocomplete="off" value="1"> <span>1</span>
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="q56" id="q562" autocomplete="off" value="2"> <span>2</span>
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="q56" id="q563" autocomplete="off" value="3"> <span>3</span>
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="q56" id="q564" autocomplete="off" value="4"> <span>4</span>
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="q56" id="q565" autocomplete="off" value="5"> <span>5</span>
+        </label>
+      </div>
+
+      <p style="margin-bottom: -10px; margin-top: 30px">A city of advanced technologies</p>
+      <div class="btn-group btn-group-toggle" data-toggle="buttons">
+        <label class="btn btn-secondary">
+          <input type="radio" name="q57" id="q571" autocomplete="off" value="1"> <span>1</span>
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="q57" id="q572" autocomplete="off" value="2"> <span>2</span>
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="q57" id="q573" autocomplete="off" value="3"> <span>3</span>
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="q57" id="q574" autocomplete="off" value="4"> <span>4</span>
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="q57" id="q575" autocomplete="off" value="5"> <span>5</span>
+        </label>
+      </div>
+
+      <h4 class="mt-5">06. Have you heard of "Smart City"?*</h4>
+      <div class="radio">
+        <label> Yes <input type="radio" name="q6" id="q61" value="Y"></label>
+      </div>
+      <div class="radio">
+        <label> No <input type="radio" name="q6" id="q62" value="N"></label>
+      </div>
+
+      <h4 class="mt-5">07. Do you understand what is "Smart City"?*</h4>
+      <div class="radio">
+        <label> Yes <input type="radio" name="q7" id="q71" value="Y"></label>
+      </div>
+      <div class="radio">
+        <label> No <input type="radio" name="q7" id="q72" value="N"></label>
+      </div>
+
+      <h4 class="mt-5">08. 3D Printing Kiosk is necessary for a smart city*</h4>
+
+
+      <div class="row">
+        <div class="col-6 col-lg-3 text-left">非常不符合</div>
+        <div class="col-6 col-lg-3 text-right">非常符合</div>
+      </div>
+
+      <div class="btn-group btn-group-toggle" data-toggle="buttons">
+        <label class="btn btn-secondary">
+          <input type="radio" name="q8" id="q81" autocomplete="off" value="1"> <span>1</span>
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="q8" id="q82" autocomplete="off" value="2"> <span>2</span>
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="q8" id="q83" autocomplete="off" value="3"> <span>3</span>
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="q8" id="q84" autocomplete="off" value="4"> <span>4</span>
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="q8" id="q85" autocomplete="off" value="5"> <span>5</span>
+        </label>
+      </div>
+
+
+      <h4 class="mt-5">09. If 3D printing is free*</h4>
+
+      <div class="row">
+        <div class="col-6 col-lg-3 text-left">非常不符合</div>
+        <div class="col-6 col-lg-3 text-right">非常符合</div>
+      </div>
+      <p class="subq">I will design my own products to print</p>
+      <div class="btn-group btn-group-toggle" data-toggle="buttons">
+        <label class="btn btn-secondary">
+          <input type="radio" name="q91" id="q911" autocomplete="off" value="1"> <span>1</span>
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="q91" id="q912" autocomplete="off" value="2"> <span>2</span>
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="q91" id="q913" autocomplete="off" value="3"> <span>3</span>
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="q91" id="q914" autocomplete="off" value="4"> <span>4</span>
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="q91" id="q915" autocomplete="off" value="5"> <span>5</span>
+        </label>
+      </div>
+
+      <p class="subq">I may buy creative prints from artists</p>
+      <div class="btn-group btn-group-toggle" data-toggle="buttons">
+        <label class="btn btn-secondary">
+          <input type="radio" name="q92" id="q921" autocomplete="off" value="1"> <span>1</span>
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="q92" id="q922" autocomplete="off" value="2"> <span>2</span>
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="q92" id="q923" autocomplete="off" value="3"> <span>3</span>
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="q92" id="q924" autocomplete="off" value="4"> <span>4</span>
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="q92" id="q925" autocomplete="off" value="5"> <span>5</span>
+        </label>
+      </div>
+
+      <h4 class="mt-5">10. 3D Printing Kiosk should be available in (multiple responses)</h4>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="checkbox mb-md-2">
+            <label>
+              <input type="checkbox" name="q10" id="q10_1" value="library"> Public Libraries
+            </label>
+          </div>
+          <div class="checkbox mb-md-2">
+            <label><input type="checkbox" name="q10" id="q10_2" value="school"> Schools
+            </label>
+          </div>
+          <div class="checkbox mb-md-2">
+            <label>
+              <input type="checkbox" name="q10" id="q10_3" value="museum"> Museums
+            </label>
+          </div>
+          <div class="checkbox mb-md-2">
+            <label>
+              <input type="checkbox" name="q10" id="q10_4" value="tourist"> Touristic Spots
+            </label>
+          </div>
+          <div class="checkbox mb-md-2">
+            <label>
+              <input type="checkbox" name="q10" id="q10_5" value="parks"> Parks
+            </label>
+          </div>
+          <div class="form-group">
+            <label for="q10other" class="bmd-label-floating">Others</label>
+            <input type="text" class="form-control" id="q10other" name="q10other">
+            <span class="bmd-help">Please specify...</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <hr class="mt-5">
+          <button id="submit" type="submit" class="btn btn-primary btn-raised">Submit</button>
+        </div>
+      </div>
+    </div>
+  </form>

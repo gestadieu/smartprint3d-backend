@@ -8,6 +8,7 @@ const UserSchema = new Schema({
   password: String,
   level: String,
   active: Boolean,
+  roles: [{ type: String, enum: ["admin", "admin_users"] }],
   created_at: { type: Date, default: Date.now },
   updated_at: { type: Date, default: Date.now },
 });
