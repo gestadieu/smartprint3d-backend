@@ -25,3 +25,7 @@ td.timeline {
 td.actions .tags {
   justify-content: flex-end;
 }
+
+.subtitle {
+  margin-top: 30px;
+}

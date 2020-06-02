@@ -24,3 +24,41 @@
    margin-bottom: -10px;
    margin-top: 30px;
  }
+
+ label.radio,
+ label.checkbox {
+   display: block;
+   margin-bottom: 20px;
+ }
+
+ .likert-question {
+   margin-bottom: 20px;
+   margin-top: 30px;
+ }
+
+ .likert-scale {
+   display: flex;
+   flex: 1;
+ }
+
+ .likert-item {
+   flex-grow: 1;
+   text-align: center;
+   margin: 1px;
+ }
+
+ .likert-item label {
+   display: block;
+   background-color: #eee;
+   padding: 5px;
+   font-size: 16px;
+   cursor: pointer;
+ }
+
+ .likert-item input[type="radio"] {
+   display: none;
+ }
+
+ .likert-item input[type="radio"]:checked+label {
+   background-color: #bbb;
+ }

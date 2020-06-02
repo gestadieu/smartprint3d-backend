@@ -1,11 +1,18 @@
 extends admin_layout.pug
 
 block content 
-  h1(class="title") #{title}
-    
+  
+  div(class="columns")
+    div(class="column is-9")
+      h1(class="title") #{title}
+    div(class="column is-3")
+      div(class="control")
+        input(class="input" type="text" placeholder="Search (NYA)")
+
   table(class="table is-striped is-fullwidth is-narrow")
     thead
       tr
+        th Order #
         th Contact 
         th Order 
         th Status 
@@ -15,6 +22,8 @@ block content
     tbody
       each order in orders
         tr
+          td(class="is-size-7")
+            span #{order._id}
           td(class="is-size-7")
             span #{order.email} 
             if order.email

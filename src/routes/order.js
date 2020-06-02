@@ -41,7 +41,7 @@ router.post("/orders", async (request, response) => {
   delete data.cartItemsId;
   delete data.cartItemsQuantity;
 
-  data.timeline = { status: "ORDERED", date: Date.now() };
+  data.timeline = { status: "ORDERED", date: Date.now(), user: undefined };
 
   try {
     const order = new Order(data);
@@ -53,14 +53,13 @@ router.post("/orders", async (request, response) => {
     });
     await survey.save();
 
-    const url_status = `${request.protocol}://${request.headers.host}orders/${order._id}`;
+    const url_status = `${request.protocol}://${request.headers.host}/api/orders/${order._id}`;
     // generate a QRCode based on the document id url
     await QRCode.toFile(`public/qrcodes/${order._id}.png`, url_status, {
       type: "png",
     });
-    response.json({ status: "success", order });
+    response.json({ success: true, status: "success", order });
   } catch (error) {
-    console.log(error);
     response.status(400).send({ status: "error", message: error });
   }
 });

@@ -38,3 +38,5 @@ block content
                     a(href="https://twitter.com/Smartprint3dI") Twitter
       br
       br
+      if order.status == 'PRINTED'
+        a(href="/admin/postsurvey/" + order._id) Post-survey

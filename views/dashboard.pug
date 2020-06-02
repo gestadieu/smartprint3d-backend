@@ -10,34 +10,47 @@ block content
                 </div>
             </div>
         </section>
-        <section class="info-tiles">
-        <div class="tile is-ancestor has-text-centered">
-            <div class="tile is-parent">
-                <article class="tile is-child box">
-                    <p class="title">#{total_orders}</p>
-                    <p class="subtitle">Total Orders</p>
-                </article>
-            </div>
 
-            <div class="tile is-parent">
-                <article class="tile is-child box">
-                    <p class="title">#{objects}</p>
-                    <p class="subtitle">Objects</p>
-                </article>
-            </div>
-            
-            <div class="tile is-parent">
-                <article class="tile is-child box">
-                    <p class="title">#{active_orders}</p>
-                    <p class="subtitle">Active Orders</p>
-                </article>
-            </div>
-            
-            <div class="tile is-parent">
-                <article class="tile is-child box">
-                    <p class="title">N/A</p>
-                    <p class="subtitle">Average Time</p>
-                </article>
-            </div>
-        </div>
-    </section>
+        section(class="info-tiles")
+            div(class="tile is-ancestor has-text-centered")
+                div(class="tile is-parent")
+                    article(class="tile is-child box")
+                        p(class="title") #{total_orders}
+                        p(class="subtitle") Total Orders
+
+                div(class="tile is-parent")
+                    article(class="tile is-child box")
+                        p(class="title") #{active_orders}
+                        p(class="subtitle") Active
+
+                div(class="tile is-parent")
+                    article(class="tile is-child box")
+                        p(class="title") #{completed_orders}
+                        p(class="subtitle") Completed 
+
+                div(class="tile is-parent")
+                    article(class="tile is-child box")
+                        p(class="title") NYA
+                        p(class="subtitle") Avg Time 
+
+        section(class="info-tiles")
+            div(class="tile is-ancestor has-text-centered")
+                div(class="tile is-parent")
+                    article(class="tile is-child box")
+                        p(class="title") #{total_objects}
+                        p(class="subtitle") Total Objects
+
+                div(class="tile is-parent")
+                    article(class="tile is-child box")
+                        p(class="title") NYA
+                        p(class="subtitle") Printing 
+
+                div(class="tile is-parent")
+                    article(class="tile is-child box")
+                        p(class="title") NYA
+                        p(class="subtitle") Delivered 
+
+                div(class="tile is-parent")
+                    article(class="tile is-child box")
+                        p(class="title") #{total_objects}
+                        p(class="subtitle") Avg Printing Time
