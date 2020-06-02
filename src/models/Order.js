@@ -95,6 +95,12 @@ OrderSchema.method({
       });
     }
   },
+
+  /**
+   *
+   * @param {Array} filters
+   */
+  buildSearchQuery: function (filters) {},
 });
 
 const Order = mongoose.model("Order", OrderSchema);

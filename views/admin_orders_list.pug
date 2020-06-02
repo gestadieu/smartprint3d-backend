@@ -2,12 +2,14 @@ extends admin_layout.pug
 
 block content 
   
-  div(class="columns")
-    div(class="column is-9")
-      h1(class="title") #{title}
-    div(class="column is-3")
-      div(class="control")
-        input(class="input" type="text" placeholder="Search (NYA)")
+  form(method="get")
+    div(class="columns")
+      div(class="column is-9")
+        h1(class="title") #{title}
+      div(class="column is-2")
+        input(class="input is-small" type="text" placeholder="Search Contacts" name="search" value=search) 
+      div(class="column is-1")
+        button(class="button is-small is-dark" type="submit") Search
 
   table(class="table is-striped is-fullwidth is-narrow")
     thead

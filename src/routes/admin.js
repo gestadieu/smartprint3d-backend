@@ -41,16 +41,29 @@ router.get("/", async (request, response) => {
  */
 router.get("/orders", async (request, response) => {
   const url_api = `${request.protocol}://${request.headers.host}${request.originalUrl}/`;
+  const search = request.query["search"];
+  const filters = { status: { $ne: "DELIVERED" } };
+
   try {
-    const orders = await Order.find({ status: { $ne: "DELIVERED" } }).sort({
+    if (search) {
+      filters.$or = [
+        { email: { $regex: search, $options: "i" } },
+        { mobile: { $regex: search, $options: "i" } },
+        { "items.item": { $regex: search, $options: "i" } },
+      ];
+    }
+
+    const orders = await Order.find(filters).sort({
       status: 1,
       created_at: -1,
     });
+
     response.render("admin_orders_list", {
       orders,
       url_api,
       title: "Active Orders",
       page: "active",
+      search,
     });
   } catch (error) {
     response.status(400).send({ status: "error", message: error });
@@ -59,8 +72,18 @@ router.get("/orders", async (request, response) => {
 
 router.get("/pastorders", async (request, response) => {
   const url_api = `${request.protocol}://${request.headers.host}${request.originalUrl}/`;
+  const search = request.query["search"];
+  const filters = { status: "DELIVERED" };
+
   try {
-    const orders = await Order.find({ status: "DELIVERED" }).sort({
+    if (search) {
+      filters.$or = [
+        { email: { $regex: search, $options: "i" } },
+        { mobile: { $regex: search, $options: "i" } },
+        { "items.item": { $regex: search, $options: "i" } },
+      ];
+    }
+    const orders = await Order.find(filters).sort({
       created_at: -1,
     });
     response.render("admin_orders_list", {
@@ -68,6 +91,7 @@ router.get("/pastorders", async (request, response) => {
       url_api,
       title: "Orders Completed",
       page: "past",
+      search,
     });
   } catch (error) {
     response.status(400).send({ status: "error", message: error });
