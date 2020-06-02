@@ -116,7 +116,7 @@ router.get("/postsurvey/:id", async (request, response) => {
     if (order.status == "PRINTED") {
       response.render("postsurvey", { order });
     } else {
-      response.redirect(`/orders/${order._id}`);
+      response.redirect(`/api/orders/${order._id}`);
     }
   } catch (err) {
     response.status(400).send({ status: "error", message: error });
