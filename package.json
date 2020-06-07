@@ -7,7 +7,7 @@
     "start": "node app.js",
     "dev": "nodemon app.js",
     "test": "NODE_ENV=test ./node_modules/mocha/bin/mocha spec/index.js",
-    "docs": "./node_modules/.bin/jsdoc -c jsdoc.json"
+    "doc": "jsdoc -c jsdoc.json"
   },
   "repository": {
     "type": "git",

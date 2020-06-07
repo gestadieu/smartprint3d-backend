@@ -33,6 +33,7 @@ const OrderSchema = new Schema({
     },
   ],
   presurvey: {
+    q0: String,
     q1: String,
     q2: String,
     q3: String,
@@ -46,7 +47,11 @@ const OrderSchema = new Schema({
     q57: Number,
     q6: String,
     q7: String,
-    q8: Number,
+    q80: Number,
+    q81: Number,
+    q82: Number,
+    q83: Number,
+    q84: Number,
     q91: Number,
     q92: Number,
     q10: Array,
@@ -62,6 +67,13 @@ const OrderSchema = new Schema({
     q8: String,
     q9: Number,
     q10: Number,
+    q11: Number,
+    q12: Number,
+    q13: Number,
+    q14: Number,
+    q15: Number,
+    q16: String,
+    q17: String,
   },
   status: {
     type: String,
@@ -97,7 +109,7 @@ OrderSchema.method({
   },
 
   /**
-   *
+   * buildSearchQ
    * @param {Array} filters
    */
   buildSearchQuery: function (filters) {},

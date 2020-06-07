@@ -41,7 +41,7 @@ router.get("/", async (request, response) => {
  */
 router.get("/orders", async (request, response) => {
   const url_api = `${request.protocol}://${request.headers.host}${request.originalUrl}/`;
-  const search = request.query["search"];
+  const { search } = request.query;
   const filters = { status: { $ne: "DELIVERED" } };
 
   try {
@@ -72,7 +72,7 @@ router.get("/orders", async (request, response) => {
 
 router.get("/pastorders", async (request, response) => {
   const url_api = `${request.protocol}://${request.headers.host}${request.originalUrl}/`;
-  const search = request.query["search"];
+  const { search } = request.query;
   const filters = { status: "DELIVERED" };
 
   try {

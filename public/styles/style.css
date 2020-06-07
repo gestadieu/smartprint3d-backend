@@ -62,3 +62,7 @@
  .likert-item input[type="radio"]:checked+label {
    background-color: #bbb;
  }
+
+ h2 {
+   margin-top: 50px;
+ }

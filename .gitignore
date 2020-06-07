@@ -10,6 +10,8 @@ database.db
 credentials.json
 public/qrcodes/*
 experimental
+docs
+jsdoc.json
 
 # Dependency directories
 node_modules/
