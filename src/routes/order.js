@@ -2,6 +2,7 @@ const router = require("express").Router();
 const { Order } = require("../models/Order");
 const Survey = require("../models/Survey");
 const QRCode = require("qrcode");
+const mailer = require("nodemailer");
 
 /**
  *

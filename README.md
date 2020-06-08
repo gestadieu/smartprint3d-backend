@@ -9,11 +9,10 @@ Backend for the SmartPrint3D.io application and reserarch project
 - [x] use mongodb/mongoose instead of nedb
 - [x] Integration with the _shop_
 - [ ] Email notification after order confirmed and after PRINTED
-- [ ] Accounts for students
+- [ ] Send email to smartprint3d.io@gmail.com upon order validation
 - [x] form validation (required fields and basic validation in mongoose schema)
 - [x] Post-survey form
 - [x] API to access the post-survey with QRCode
-- [ ] Send email to smartprint3d.io@gmail.com upon order validation
 - [x] if QRCode is scanned: test if the status == PRINTED then show post-survey
 - [x] Post-survey: display order information as well
 - [ ] Tests and security

@@ -119,6 +119,13 @@ router.get("/orders/:id/flag/:flag", async (request, response) => {
 /**
  *
  */
+router.get("/orders/:id/delete", async (request, response) => {
+  console.log("deleting...", request.params.id);
+});
+
+/**
+ *
+ */
 router.get("/users", async (request, response) => {
   try {
     const users = await User.find();
