@@ -150,7 +150,7 @@ router.get("/postsurvey/:id", async (request, response) => {
   try {
     const lang = request.query["lang"] ? request.query.lang : "cn";
     const order = await Order.findById(request.params.id);
-    if (order.status == "PRINTED") {
+    if (order.status == "03.PRINTED") {
       response.render(`postsurvey_${lang}`, { order, lang });
     } else {
       response.redirect(`/api/orders/${order._id}`);
@@ -170,7 +170,7 @@ router.post("/postsurvey", async (request, response) => {
   try {
     const order = await Order.findById(order_id);
     order.postsurvey = postsurvey;
-    await order.updateFlag("DELIVERED", request.user);
+    await order.updateFlag("04.DELIVERED", request.user);
     await order.save();
     response.render("thankyou");
   } catch (err) {

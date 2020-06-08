@@ -42,7 +42,7 @@ router.post("/orders", async (request, response) => {
   delete data.cartItemsId;
   delete data.cartItemsQuantity;
 
-  data.timeline = { status: "ORDERED", date: Date.now(), user: undefined };
+  data.timeline = { status: "01.ORDERED", date: Date.now(), user: undefined };
 
   try {
     const order = new Order(data);

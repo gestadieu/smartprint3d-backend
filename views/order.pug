@@ -17,18 +17,18 @@ block content
                 strong Hi!
               
               p The status of your order is 
-                if order.status == 'ORDERED'
+                if order.status == '01.ORDERED'
                   span(class="tag is-black")=order.status
                   p We have well received your order and we will process it soon. Smile while we are taking care of everything ;-)
-                if order.status == 'PRINTING'
+                if order.status == '02.PRINTING'
                   span(class="tag is-light")=order.status
                   p We are working hard at printing your order 👷. Stay calm and 3D Print!
-                if order.status == 'PRINTED'
+                if order.status == '03.PRINTED'
                   span(class="tag is-info")=order.status
                   p We did it!!! 
                   span Your order is ready, come and 
                   a(href="https://smartprint3d.io/") pick it up 😊
-                if order.status == 'DELIVERED'
+                if order.status == '04.DELIVERED'
                   span(class="tag is-primary")=order.status
                   p You rocks! 😎 We hope you are enjoying your objects, please send us photos on 
                     a(href="https://www.facebook.com/SmartPrint3Dio-104606694566294") Facebook 
@@ -38,5 +38,5 @@ block content
                     a(href="https://twitter.com/Smartprint3dI") Twitter
       br
       br
-      if order.status == 'PRINTED'
+      if order.status == '03.PRINTED'
         a(href="/admin/postsurvey/" + order._id) Post-survey
