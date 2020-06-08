@@ -6,7 +6,7 @@ block content
       div(class="column is-9")
         h1(class="title") #{title}
       div(class="column is-2")
-        input(class="input is-small" type="text" placeholder="Search Contacts, Objects" name="search" value=search) 
+        input(class="input is-small" type="text" placeholder="Search Status, Contacts, Objects" name="search" value=search) 
       div(class="column is-1")
         if search
           a(class="button is-small is-danger" href=url_page) Clear
@@ -44,7 +44,7 @@ block content
               if order.status == '01.ORDERED'
                 span(class="tag is-black")=order.status
               else if order.status == '02.PRINTING'
-                span(class="tag is-primary")=order.status
+                span(class="tag is-info")=order.status
               else if order.status == '03.PRINTED'
                 span(class="tag is-warning")=order.status
               else if order.status == '04.DELIVERED'
@@ -52,7 +52,7 @@ block content
           
           td(class="timeline")
             each ti in order.timeline 
-              span(class=(ti.status == '01.ORDERED')? "has-text-black":(ti.status == '02.PRINTING')?"has-text-dark":(ti.status == '03.PRINTED')?"has-text-info":"has-text-success") #{ti.status} 
+              span(class=(ti.status == '01.ORDERED')? "has-text-black":(ti.status == '02.PRINTING')?"has-text-info":(ti.status == '03.PRINTED')?"has-text-warning":(ti.status=='DELETED')?"has-text-danger":"has-text-success") #{ti.status} 
               br
           td(class="timeline")
             each ti in order.timeline 
@@ -61,31 +61,31 @@ block content
               br
           if page != 'past'
             td(class="actions")
-
-              div(class="dropdown")
-                div(class="dropdown-trigger")
-                  button(class="button is-small" aria-haspopup="true" aria-controls="dropdown-menu-"+order._id)
-                    span Actions 
-                    span(class="icon is-small")
-                      i(class="fas fa-angle-down" aria-hidden="true")
-                div(class="dropdown-menu" role="menu" id="dropdown-menu-"+order._id)
-                  div(class="dropdown-content")
-                    a(href="/api/orders/" + order._id  class="dropdown-item" target="postsurvey") STATUS
-                    a(href="" class="dropdown-item") 
-                      if order.status == '01.ORDERED'
-                        a(href=url_api + order._id +"/flag/02.printing" class="dropdown-item") PRINTING 
-                      else if order.status == '02.PRINTING'
-                        a(href=url_api + order._id +"/flag/03.printed" class="dropdown-item") PRINTED 
-                      else if order.status == '03.PRINTED'
-                        a(href=url_api + order._id +"/flag/04.delivered" class="dropdown-item") 
-                          span(class="icon") 
-                            i(class="fas fa-exclamation-triangle")
-                          span Delivering
-                    hr(class="dropdown-divider")
-                    a(href=url_api + order._id + "/flag/deleted" class="dropdown-item is-danger")
-                      span(class="icon")
-                        i(class="fas fa-ban")
-                      span Delete 
+              if page != 'deleted'
+                div(class="dropdown")
+                  div(class="dropdown-trigger")
+                    button(class="button is-small" aria-haspopup="true" aria-controls="dropdown-menu-"+order._id)
+                      span Actions 
+                      span(class="icon is-small")
+                        i(class="fas fa-angle-down" aria-hidden="true")
+                  div(class="dropdown-menu" role="menu" id="dropdown-menu-"+order._id)
+                    div(class="dropdown-content")
+                      a(href="/api/orders/" + order._id  class="dropdown-item" target="postsurvey") STATUS
+                      a(href="" class="dropdown-item") 
+                        if order.status == '01.ORDERED'
+                          a(href=url_api + order._id +"/flag/02.printing" class="dropdown-item") PRINTING 
+                        else if order.status == '02.PRINTING'
+                          a(href=url_api + order._id +"/flag/03.printed" class="dropdown-item") PRINTED 
+                        else if order.status == '03.PRINTED'
+                          a(href=url_api + order._id +"/flag/04.delivered" class="dropdown-item") 
+                            span(class="icon") 
+                              i(class="fas fa-exclamation-triangle")
+                            span Delivering
+                      hr(class="dropdown-divider")
+                      a(href=url_api + order._id + "/flag/deleted" class="dropdown-item is-danger")
+                        span(class="icon")
+                          i(class="fas fa-ban")
+                        span Delete 
 
               //- div(class="buttons are-small has-addons")
                 a(href="/api/orders/" + order._id class="button" target="postsurvey") STATUS 
