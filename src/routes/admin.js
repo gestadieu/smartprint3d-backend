@@ -120,7 +120,14 @@ router.get("/orders/:id/flag/:flag", async (request, response) => {
  *
  */
 router.get("/orders/:id/delete", async (request, response) => {
-  console.log("deleting...", request.params.id);
+  try {
+    const order = await Order.findById(request.params.id);
+    await order.delete();
+    response.redirect("/admin/orders");
+  } catch (err) {
+    console.log(err);
+    response.status(400).send({ status: "error", message: err });
+  }
 });
 
 /**
