@@ -49,6 +49,8 @@ block content
                 span(class="tag is-warning")=order.status
               else if order.status == '04.DELIVERED'
                 span(class="tag is-success")=order.status  
+              else if order.status == 'DELETED'
+                span(class="tag is-danger")=order.status  
           
           td(class="timeline")
             each ti in order.timeline 
