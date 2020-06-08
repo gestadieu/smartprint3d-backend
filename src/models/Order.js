@@ -91,9 +91,12 @@ const OrderSchema = new Schema({
   updated_at: { type: Date, default: Date.now },
 });
 
-OrderSchema.methods.updateFlag = function (cb) {
-  return mongoose.model("Animal").find({ type: this.type }, cb);
-};
+OrderSchema.pre("save", function (next) {
+  var currentDate = new Date();
+  this.updated_at = currentDate;
+  if (!this.created_at) this.created_at = currentDate;
+  next();
+});
 
 OrderSchema.method({
   /**

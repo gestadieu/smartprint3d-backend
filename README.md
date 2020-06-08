@@ -2,25 +2,12 @@
 
 Backend for the SmartPrint3D.io application and reserarch project
 
-- [x] Pre-survey form
-- [x] API
-- [x] use Google API for google-spreadsheet
-- [x] QR Code generator on order
-- [x] use mongodb/mongoose instead of nedb
 - [x] Integration with the _shop_
-- [x] is_deleted flag
 - [ ] online/onsite detection
 - [ ] Email notification after order confirmed and after PRINTED
 - [ ] Fix the nb_objects on dashboard
-- [ ] Fix the updated_at field
 - [ ] Send email to smartprint3d.io@gmail.com upon order validation
-- [x] form validation (required fields and basic validation in mongoose schema)
-- [x] Post-survey form
-- [x] API to access the post-survey with QRCode
-- [x] if QRCode is scanned: test if the status == PRINTED then show post-survey
-- [x] Post-survey: display order information as well
-- [ ] Tests and security
-- [x] SSL for API
+- [ ] printing/printed should be per object
 
 Installation
 

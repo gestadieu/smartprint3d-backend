@@ -46,7 +46,7 @@ router.get("/", async (request, response) => {
 router.get("/orders", async (request, response) => {
   const url_api = `${request.protocol}://${request.headers.host}${request.originalUrl}/`;
   const url_page = `${request.protocol}://${request.headers.host}${request.baseUrl}${request.path}`;
-  console.log(url_page);
+
   const { search } = request.query;
   const filters = {
     $and: [{ status: { $ne: "04.DELIVERED" } }, { status: { $ne: "DELETED" } }],

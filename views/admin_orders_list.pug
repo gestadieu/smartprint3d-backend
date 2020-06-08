@@ -73,11 +73,11 @@ block content
                     a(href="/api/orders/" + order._id  class="dropdown-item" target="postsurvey") STATUS
                     a(href="" class="dropdown-item") 
                       if order.status == '01.ORDERED'
-                        a(href=url_api + order._id +"/flag/printing" class="dropdown-item") PRINTING 
+                        a(href=url_api + order._id +"/flag/02.printing" class="dropdown-item") PRINTING 
                       else if order.status == '02.PRINTING'
-                        a(href=url_api + order._id +"/flag/printed" class="dropdown-item") PRINTED 
+                        a(href=url_api + order._id +"/flag/03.printed" class="dropdown-item") PRINTED 
                       else if order.status == '03.PRINTED'
-                        a(href=url_api + order._id +"/flag/delivered" class="dropdown-item") 
+                        a(href=url_api + order._id +"/flag/04.delivered" class="dropdown-item") 
                           span(class="icon") 
                             i(class="fas fa-exclamation-triangle")
                           span Delivering
