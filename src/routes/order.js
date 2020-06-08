@@ -58,7 +58,13 @@ router.post("/orders", async (request, response) => {
     await QRCode.toFile(`public/qrcodes/${order._id}.png`, url_status, {
       type: "png",
     });
-    response.json({ success: true, status: "success", order });
+
+    //Send email with QRCode
+
+    response.json({
+      success: 1,
+      successMessage: "Your order has been received",
+    });
   } catch (error) {
     response.status(400).send({ status: "error", message: error });
   }

@@ -28,7 +28,7 @@ block content
       each order in orders
         tr
           td(class="is-size-7")
-            span #{order._id}
+            a(href="/qrcodes/" + order._id + ".png") #{order._id}
           td(class="is-size-7")
             span #{order.email} 
             if order.email
