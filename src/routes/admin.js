@@ -3,6 +3,7 @@ const passport = require("passport");
 const login = require("connect-ensure-login");
 const { Order } = require("../models/Order");
 const User = require("../models/User");
+const url = require("url");
 
 router.all("/*", login.ensureLoggedIn("/login"), function (req, res, next) {
   next();
@@ -13,12 +14,15 @@ router.all("/*", login.ensureLoggedIn("/login"), function (req, res, next) {
  * shows global data analysis
  */
 router.get("/", async (request, response) => {
-  const total_orders = await Order.countDocuments();
+  const total_orders = await Order.countDocuments({
+    status: { $ne: "DELETED" },
+  });
+
   const active_orders = await Order.countDocuments({
-    status: { $ne: "DELIVERED" },
+    $and: [{ status: { $ne: "04.DELIVERED" } }, { status: { $ne: "DELETED" } }],
   });
   const completed_orders = await Order.countDocuments({
-    status: { $eq: "DELIVERED" },
+    status: { $eq: "04.DELIVERED" },
   });
   const nb_objects = await Order.aggregate([
     {
@@ -41,8 +45,12 @@ router.get("/", async (request, response) => {
  */
 router.get("/orders", async (request, response) => {
   const url_api = `${request.protocol}://${request.headers.host}${request.originalUrl}/`;
+  const url_page = `${request.protocol}://${request.headers.host}${request.baseUrl}${request.path}`;
+  console.log(url_page);
   const { search } = request.query;
-  const filters = { status: { $ne: "DELIVERED" } };
+  const filters = {
+    $and: [{ status: { $ne: "04.DELIVERED" } }, { status: { $ne: "DELETED" } }],
+  };
 
   try {
     if (search) {
@@ -50,17 +58,19 @@ router.get("/orders", async (request, response) => {
         { email: { $regex: search, $options: "i" } },
         { mobile: { $regex: search, $options: "i" } },
         { "items.item": { $regex: search, $options: "i" } },
+        { status: { $regex: search, $options: "i" } },
       ];
     }
 
     const orders = await Order.find(filters).sort({
       status: 1,
-      created_at: -1,
+      updated_at: 1,
     });
 
     response.render("admin_orders_list", {
       orders,
       url_api,
+      url_page,
       title: "Active Orders",
       page: "active",
       search,
@@ -72,8 +82,9 @@ router.get("/orders", async (request, response) => {
 
 router.get("/pastorders", async (request, response) => {
   const url_api = `${request.protocol}://${request.headers.host}${request.originalUrl}/`;
+  const url_page = `${request.protocol}://${request.headers.host}${request.baseUrl}${request.path}`;
   const { search } = request.query;
-  const filters = { status: "DELIVERED" };
+  const filters = { status: "04.DELIVERED" };
 
   try {
     if (search) {
@@ -89,6 +100,7 @@ router.get("/pastorders", async (request, response) => {
     response.render("admin_orders_list", {
       orders,
       url_api,
+      url_page,
       title: "Orders Completed",
       page: "past",
       search,
@@ -113,20 +125,6 @@ router.get("/orders/:id/flag/:flag", async (request, response) => {
   } catch (error) {
     console.log(error);
     response.status(400).send({ status: "error", message: error });
-  }
-});
-
-/**
- *
- */
-router.get("/orders/:id/delete", async (request, response) => {
-  try {
-    const order = await Order.findById(request.params.id);
-    await order.delete();
-    response.redirect("/admin/orders");
-  } catch (err) {
-    console.log(err);
-    response.status(400).send({ status: "error", message: err });
   }
 });
 

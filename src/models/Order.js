@@ -21,8 +21,7 @@ const OrderSchema = new Schema({
       status: {
         type: String,
         required: true,
-        default: "ORDERED",
-        enum: ["ORDERED", "PRINTING", "PRINTED", "DELIVERED"],
+        default: "01.ORDERED",
       },
       date: {
         type: Date,
@@ -78,8 +77,15 @@ const OrderSchema = new Schema({
   status: {
     type: String,
     required: true,
-    default: "ORDERED",
-    enum: ["ORDERED", "PRINTING", "PRINTED", "DELIVERED"],
+    default: "01.ORDERED",
+    enum: [
+      "01.ORDERED",
+      "02.PRINTING",
+      "03.PRINTED",
+      "04.DELIVERED",
+      "DELETED",
+      "CANCELED",
+    ],
   },
   created_at: { type: Date, default: Date.now },
   updated_at: { type: Date, default: Date.now },
@@ -97,7 +103,13 @@ OrderSchema.method({
    */
   updateFlag: function (flag, user) {
     const newFlag = flag.toUpperCase();
-    const VALID_FLAGS = ["ORDERED", "PRINTING", "PRINTED", "DELIVERED"];
+    const VALID_FLAGS = [
+      "01.ORDERED",
+      "02.PRINTING",
+      "03.PRINTED",
+      "04.DELIVERED",
+      "DELETED",
+    ];
     if (VALID_FLAGS.includes(newFlag)) {
       this.status = newFlag;
       this.timeline.push({

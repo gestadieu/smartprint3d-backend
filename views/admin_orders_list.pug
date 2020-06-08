@@ -1,7 +1,6 @@
 extends admin_layout.pug
 
 block content 
-
   form(method="get")
     div(class="columns")
       div(class="column is-9")
@@ -10,7 +9,7 @@ block content
         input(class="input is-small" type="text" placeholder="Search Contacts, Objects" name="search" value=search) 
       div(class="column is-1")
         if search
-          a(class="button is-small is-danger" href="") Clear
+          a(class="button is-small is-danger" href=url_page) Clear
         else 
           button(class="button is-small is-dark" type="submit") Search
 
@@ -42,18 +41,18 @@ block content
               br
           td
             p(class="field")
-              if order.status == 'ORDERED'
+              if order.status == '01.ORDERED'
                 span(class="tag is-black")=order.status
-              else if order.status == 'PRINTING'
+              else if order.status == '02.PRINTING'
                 span(class="tag is-primary")=order.status
-              else if order.status == 'PRINTED'
+              else if order.status == '03.PRINTED'
                 span(class="tag is-warning")=order.status
-              else if order.status == 'DELIVERED'
+              else if order.status == '04.DELIVERED'
                 span(class="tag is-success")=order.status  
           
           td(class="timeline")
             each ti in order.timeline 
-              span(class=(ti.status == 'ORDERED')? "has-text-black":(ti.status == 'PRINTING')?"has-text-dark":(ti.status == 'PRINTED')?"has-text-info":"has-text-success") #{ti.status} 
+              span(class=(ti.status == '01.ORDERED')? "has-text-black":(ti.status == '02.PRINTING')?"has-text-dark":(ti.status == '03.PRINTED')?"has-text-info":"has-text-success") #{ti.status} 
               br
           td(class="timeline")
             each ti in order.timeline 
@@ -73,17 +72,17 @@ block content
                   div(class="dropdown-content")
                     a(href="/api/orders/" + order._id  class="dropdown-item" target="postsurvey") STATUS
                     a(href="" class="dropdown-item") 
-                      if order.status == 'ORDERED'
+                      if order.status == '01.ORDERED'
                         a(href=url_api + order._id +"/flag/printing" class="dropdown-item") PRINTING 
-                      else if order.status == 'PRINTING'
+                      else if order.status == '02.PRINTING'
                         a(href=url_api + order._id +"/flag/printed" class="dropdown-item") PRINTED 
-                      else if order.status == 'PRINTED'
+                      else if order.status == '03.PRINTED'
                         a(href=url_api + order._id +"/flag/delivered" class="dropdown-item") 
                           span(class="icon") 
                             i(class="fas fa-exclamation-triangle")
                           span Delivering
                     hr(class="dropdown-divider")
-                    a(href=url_api + order._id + "/delete" class="dropdown-item is-danger")
+                    a(href=url_api + order._id + "/flag/deleted" class="dropdown-item is-danger")
                       span(class="icon")
                         i(class="fas fa-ban")
                       span Delete 

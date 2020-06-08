@@ -8,7 +8,11 @@ Backend for the SmartPrint3D.io application and reserarch project
 - [x] QR Code generator on order
 - [x] use mongodb/mongoose instead of nedb
 - [x] Integration with the _shop_
+- [x] is_deleted flag
+- [ ] online/onsite detection
 - [ ] Email notification after order confirmed and after PRINTED
+- [ ] Fix the nb_objects on dashboard
+- [ ] Fix the updated_at field
 - [ ] Send email to smartprint3d.io@gmail.com upon order validation
 - [x] form validation (required fields and basic validation in mongoose schema)
 - [x] Post-survey form
