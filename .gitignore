@@ -12,6 +12,7 @@ public/qrcodes/*
 experimental
 docs
 jsdoc.json
+create-users.js
 
 # Dependency directories
 node_modules/

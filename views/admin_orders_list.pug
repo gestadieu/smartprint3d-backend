@@ -45,9 +45,9 @@ block content
               if order.status == 'ORDERED'
                 span(class="tag is-black")=order.status
               else if order.status == 'PRINTING'
-                span(class="tag")=order.status
+                span(class="tag is-primary")=order.status
               else if order.status == 'PRINTED'
-                span(class="tag is-info")=order.status
+                span(class="tag is-warning")=order.status
               else if order.status == 'DELIVERED'
                 span(class="tag is-success")=order.status  
           
@@ -62,10 +62,16 @@ block content
               br
           if page != 'past'
             td(class="actions")
-              if order.status == 'ORDERED'
-                a(href=url_api + order._id +"/flag/printing" class="button is-light is-small") PRINTING 
-              else if order.status == 'PRINTING'
-                a(href=url_api + order._id +"/flag/printed" class="button is-light is-small") PRINTED
-              else if order.status == 'PRINTED'
-                a(href=url_api + order._id +"/flag/delivered" class="button is-light is-small") DELIVERING
+              div(class="buttons are-small has-addons")
+                a(href="/api/orders/" + order._id class="button" target="postsurvey") STATUS 
+                if order.status == 'ORDERED'
+                  a(href=url_api + order._id +"/flag/printing" class="button") PRINTING &raquo;
+                else if order.status == 'PRINTING'
+                  a(href=url_api + order._id +"/flag/printed" class="button") PRINTED &raquo;
+                else if order.status == 'PRINTED'
+                  a(href=url_api + order._id +"/flag/delivered" class="button is-danger") 
+                    span(class="icon") 
+                      i(class="fas fa-exclamation-triangle")
+                    span Delivering
+                
 
