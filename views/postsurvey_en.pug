@@ -1,0 +1,407 @@
+extends layout.pug
+
+block content
+  div(class="columns")
+    div(class="column is-3 is-offset-5")
+        figure(class="image is-128x128")
+          img(src="/images/logo-smartprint3d.jpg" ) 
+  
+  div(class="columns")
+    div(class="column is-8 is-offset-2")
+      div(class="divider") Post-Survey  
+      form(name="survey" action="/admin/postsurvey" method="post")
+        input(type="hidden" name="order_id" value=order._id)
+        
+        h2(class="subtitle has-text-weight-bold") Educational Background
+
+        div(class="field")
+          input(type="radio" name="postsurvey[q1]" value="primary" class="is-checkradio" id="postsurveyq1_1")  
+          label(class="radio" for="postsurveyq1_1") Primary or below
+
+        div(class="field")
+          input(type="radio" name="postsurvey[q1]" value="secondary" class="is-checkradio" id="postsurveyq1_2")  
+          label(class="radio" for="postsurveyq1_2") Secondary
+
+        div(class="field")
+          input(type="radio" name="postsurvey[q1]" value="bachelor" class="is-checkradio" id="postsurveyq1_3")  
+          label(class="radio" for="postsurveyq1_3") Bachelor
+
+        div(class="field")
+          input(type="radio" name="postsurvey[q1]" value="master" class="is-checkradio" id="postsurveyq1_4")  
+          label(class="radio" for="postsurveyq1_4") Master and above
+          
+        
+        h2(class="subtitle has-text-weight-bold") Monthly income (MOP)
+
+        div(class="field")
+          input(type="radio" name="postsurvey[q2]" value="0" class="is-checkradio" id="postsurveyq2_1")  
+          label(class="radio" for="postsurveyq2_1") No
+
+        div(class="field")
+          input(type="radio" name="postsurvey[q2]" value="1000-below" class="is-checkradio" id="postsurveyq2_2")  
+          label(class="radio" for="postsurveyq2_2") 1,000 and below
+        
+        div(class="field")
+          input(type="radio" name="postsurvey[q2]" value="1001-5000" class="is-checkradio" id="postsurveyq2_3")  
+          label(class="radio" for="postsurveyq2_3") 1,001 - 5,000
+
+        div(class="field")
+          input(type="radio" name="postsurvey[q2]" value="5001-10000" class="is-checkradio" id="postsurveyq2_4")  
+          label(class="radio" for="postsurveyq2_4") 5,001 - 10,000
+
+        div(class="field")
+          input(type="radio" name="postsurvey[q2]" value="1001-15000" class="is-checkradio" id="postsurveyq2_5")  
+          label(class="radio" for="postsurveyq2_5") 10,001 - 15,000
+
+        div(class="field")
+          input(type="radio" name="postsurvey[q2]" value="15001-20000" class="is-checkradio" id="postsurveyq2_6")  
+          label(class="radio" for="postsurveyq2_6") 15,001 - 20,000
+
+        div(class="field")
+          input(type="radio" name="postsurvey[q2]" value="20001+" class="is-checkradio" id="postsurveyq2_7")  
+          label(class="radio" for="postsurveyq2_7") 20,001 and above
+
+        div(class="field")
+          div(class="likert")
+            h2(class="subtitle likert-question has-text-weight-bold") I am happy to get my 3D Print...
+            div(class="level")
+              div(class="level-left")
+                div(class="level-item") Fully Disagree
+              div(class="level-right")
+                div(class="level-item") Fully Agree
+            
+            div(class="likert-scale")
+              div(class="likert-item")
+                input(type="radio" name="postsurvey[q3]" value="1" id="q31" required)
+                label(for="q31") 1
+              div(class="likert-item")
+                input(type="radio" name="postsurvey[q3]" value="2" id="q32" required)
+                label(for="q32") 2
+              div(class="likert-item")
+                input(type="radio" name="postsurvey[q3]" value="3" id="q33" required)
+                label(for="q33") 3
+              div(class="likert-item")
+                input(type="radio" name="postsurvey[q3]" value="4" id="q34" required)
+                label(for="q34") 4
+              div(class="likert-item")
+                input(type="radio" name="postsurvey[q3]" value="5" id="q35" required)
+                label(for="q35") 5
+
+        div(class="field")
+          div(class="likert")
+            h2(class="subtitle likert-question has-text-weight-bold") I am satisfied with the 3D Printing Kiosk
+            div(class="level")
+              div(class="level-left")
+                div(class="level-item") Fully Disagree
+              div(class="level-right")
+                div(class="level-item") Fully Agree
+            
+            div(class="likert-scale")
+              div(class="likert-item")
+                input(type="radio" name="postsurvey[q4]" value="1" id="q41" required)
+                label(for="q41") 1
+              div(class="likert-item")
+                input(type="radio" name="postsurvey[q4]" value="2" id="q42" required)
+                label(for="q42") 2
+              div(class="likert-item")
+                input(type="radio" name="postsurvey[q4]" value="3" id="q43" required)
+                label(for="q43") 3
+              div(class="likert-item")
+                input(type="radio" name="postsurvey[q4]" value="4" id="q44" required)
+                label(for="q44") 4
+              div(class="likert-item")
+                input(type="radio" name="postsurvey[q4]" value="5" id="q45" required)
+                label(for="q45") 5
+        
+        div(class="field")
+          div(class="likert")
+            h2(class="subtitle likert-question has-text-weight-bold") I will recommend the 3D Printing Kiosk to others
+            div(class="level")
+              div(class="level-left")
+                div(class="level-item") Fully Disagree
+              div(class="level-right")
+                div(class="level-item") Fully Agree
+            
+            div(class="likert-scale")
+              div(class="likert-item")
+                input(type="radio" name="postsurvey[q5]" value="1" id="q51" required)
+                label(for="q51") 1
+              div(class="likert-item")
+                input(type="radio" name="postsurvey[q5]" value="2" id="q52" required)
+                label(for="q52") 2
+              div(class="likert-item")
+                input(type="radio" name="postsurvey[q5]" value="3" id="q53" required)
+                label(for="q53") 3
+              div(class="likert-item")
+                input(type="radio" name="postsurvey[q5]" value="4" id="q54" required)
+                label(for="q54") 4
+              div(class="likert-item")
+                input(type="radio" name="postsurvey[q5]" value="5" id="q55" required)
+                label(for="q55") 5
+        
+        div(class="field")
+          div(class="likert")
+            h2(class="subtitle likert-question has-text-weight-bold") I will be more satisfied if I can see the whole printing process online
+            div(class="level")
+              div(class="level-left")
+                div(class="level-item") Fully Disagree
+              div(class="level-right")
+                div(class="level-item") Fully Agree
+            
+            div(class="likert-scale")
+              div(class="likert-item")
+                input(type="radio" name="postsurvey[q6]" value="1" id="q61" required)
+                label(for="q61") 1
+              div(class="likert-item")
+                input(type="radio" name="postsurvey[q6]" value="2" id="q62" required)
+                label(for="q62") 2
+              div(class="likert-item")
+                input(type="radio" name="postsurvey[q6]" value="3" id="q63" required)
+                label(for="q63") 3
+              div(class="likert-item")
+                input(type="radio" name="postsurvey[q6]" value="4" id="q64" required)
+                label(for="q64") 4
+              div(class="likert-item")
+                input(type="radio" name="postsurvey[q6]" value="5" id="q65" required)
+                label(for="q65") 5
+
+        div(class="field")
+          div(class="likert")
+            h2(class="subtitle likert-question has-text-weight-bold") 3D Printing Kiosk is easy to use
+            div(class="level")
+              div(class="level-left")
+                div(class="level-item") Very Easy
+              div(class="level-right")
+                div(class="level-item") Very Difficult
+            
+            div(class="likert-scale")
+              div(class="likert-item")
+                input(type="radio" name="postsurvey[q7]" value="1" id="q71" required)
+                label(for="q71") 1
+              div(class="likert-item")
+                input(type="radio" name="postsurvey[q7]" value="2" id="q72" required)
+                label(for="q72") 2
+              div(class="likert-item")
+                input(type="radio" name="postsurvey[q7]" value="3" id="q73" required)
+                label(for="q73") 3
+              div(class="likert-item")
+                input(type="radio" name="postsurvey[q7]" value="4" id="q74" required)
+                label(for="q74") 4
+              div(class="likert-item")
+                input(type="radio" name="postsurvey[q7]" value="5" id="q75" required)
+                label(for="q75") 5
+        
+        h2(class="subtitle has-text-weight-bold") I prefer to place the order
+
+        div(class="field")
+          input(type="radio" name="postsurvey[q8]" value="online" class="is-checkradio" id="postsurveyq8_1")  
+          label(class="radio" for="postsurveyq8_1") Online
+
+        div(class="field")
+          input(type="radio" name="postsurvey[q8]" value="onsite" class="is-checkradio" id="postsurveyq8_2")  
+          label(class="radio" for="postsurveyq8_2") On Site
+        
+        div(class="field")
+          div(class="likert")
+            h2(class="subtitle likert-question has-text-weight-bold") I want to have training on 3D printing
+            div(class="level")
+              div(class="level-left")
+                div(class="level-item") Fully Disagree
+              div(class="level-right")
+                div(class="level-item") Fully Agree
+            
+            div(class="likert-scale")
+              div(class="likert-item")
+                input(type="radio" name="postsurvey[q9]" value="1" id="q91" required)
+                label(for="q91") 1
+              div(class="likert-item")
+                input(type="radio" name="postsurvey[q9]" value="2" id="q92" required)
+                label(for="q92") 2
+              div(class="likert-item")
+                input(type="radio" name="postsurvey[q9]" value="3" id="q93" required)
+                label(for="q93") 3
+              div(class="likert-item")
+                input(type="radio" name="postsurvey[q9]" value="4" id="q94" required)
+                label(for="q94") 4
+              div(class="likert-item")
+                input(type="radio" name="postsurvey[q9]" value="5" id="q95" required)
+                label(for="q95") 5
+
+        div(class="field")
+          div(class="likert")
+            h2(class="subtitle likert-question has-text-weight-bold") I am willing to pay for the 3D prints
+            div(class="level")
+              div(class="level-left")
+                div(class="level-item") Fully Disagree
+              div(class="level-right")
+                div(class="level-item") Fully Agree
+            
+            div(class="likert-scale")
+              div(class="likert-item")
+                input(type="radio" name="postsurvey[q10]" value="1" id="q101" required)
+                label(for="q101") 1
+              div(class="likert-item")
+                input(type="radio" name="postsurvey[q10]" value="2" id="q102" required)
+                label(for="q102") 2
+              div(class="likert-item")
+                input(type="radio" name="postsurvey[q10]" value="3" id="q103" required)
+                label(for="q103") 3
+              div(class="likert-item")
+                input(type="radio" name="postsurvey[q10]" value="4" id="q104" required)
+                label(for="q104") 4
+              div(class="likert-item")
+                input(type="radio" name="postsurvey[q10]" value="5" id="q105" required)
+                label(for="q105") 5
+        
+        div(class="field")
+          div(class="likert")
+            h2(class="subtitle likert-question has-text-weight-bold") 3D Printing Kiosk is necessary for a smart city
+            div(class="level")
+              div(class="level-left")
+                div(class="level-item") Fully Disagree
+              div(class="level-right")
+                div(class="level-item") Fully Agree
+            
+            div(class="likert-scale")
+              div(class="likert-item")
+                input(type="radio" name="postsurvey[q11]" value="1" id="q111" required)
+                label(for="q111") 1
+              div(class="likert-item")
+                input(type="radio" name="postsurvey[q11]" value="2" id="q112" required)
+                label(for="q112") 2
+              div(class="likert-item")
+                input(type="radio" name="postsurvey[q11]" value="3" id="q113" required)
+                label(for="q113") 3
+              div(class="likert-item")
+                input(type="radio" name="postsurvey[q11]" value="4" id="q114" required)
+                label(for="q114") 4
+              div(class="likert-item")
+                input(type="radio" name="postsurvey[q11]" value="5" id="q115" required)
+                label(for="q115") 5
+
+        div(class="field")
+          div(class="likert")
+            h2(class="subtitle likert-question has-text-weight-bold") I believe local government offers service in an efficient way (communication and technology)
+            div(class="level")
+              div(class="level-left")
+                div(class="level-item") Fully Disagree
+              div(class="level-right")
+                div(class="level-item") Fully Agree
+            
+            div(class="likert-scale")
+              div(class="likert-item")
+                input(type="radio" name="postsurvey[q12]" value="1" id="q121" required)
+                label(for="q121") 1
+              div(class="likert-item")
+                input(type="radio" name="postsurvey[q12]" value="2" id="q122" required)
+                label(for="q122") 2
+              div(class="likert-item")
+                input(type="radio" name="postsurvey[q12]" value="3" id="q123" required)
+                label(for="q123") 3
+              div(class="likert-item")
+                input(type="radio" name="postsurvey[q12]" value="4" id="q124" required)
+                label(for="q124") 4
+              div(class="likert-item")
+                input(type="radio" name="postsurvey[q12]" value="5" id="q125" required)
+                label(for="q125") 5
+        
+        div(class="field")
+          div(class="likert")
+            h2(class="subtitle likert-question has-text-weight-bold") I can obtain many public services effectively vai mobile app or websites
+            div(class="level")
+              div(class="level-left")
+                div(class="level-item") Fully Disagree
+              div(class="level-right")
+                div(class="level-item") Fully Agree
+            
+            div(class="likert-scale")
+              div(class="likert-item")
+                input(type="radio" name="postsurvey[q13]" value="1" id="q131" required)
+                label(for="q131") 1
+              div(class="likert-item")
+                input(type="radio" name="postsurvey[q13]" value="2" id="q132" required)
+                label(for="q132") 2
+              div(class="likert-item")
+                input(type="radio" name="postsurvey[q13]" value="3" id="q133" required)
+                label(for="q133") 3
+              div(class="likert-item")
+                input(type="radio" name="postsurvey[q13]" value="4" id="q134" required)
+                label(for="q134") 4
+              div(class="likert-item")
+                input(type="radio" name="postsurvey[q13]" value="5" id="q135" required)
+                label(for="q135") 5
+
+        div(class="field")
+          div(class="likert")
+            h2(class="subtitle likert-question has-text-weight-bold") I believe Smart city is the future direction of the city
+            div(class="level")
+              div(class="level-left")
+                div(class="level-item") Fully Disagree
+              div(class="level-right")
+                div(class="level-item") Fully Agree
+            
+            div(class="likert-scale")
+              div(class="likert-item")
+                input(type="radio" name="postsurvey[q14]" value="1" id="q141" required)
+                label(for="q141") 1
+              div(class="likert-item")
+                input(type="radio" name="postsurvey[q14]" value="2" id="q142" required)
+                label(for="q142") 2
+              div(class="likert-item")
+                input(type="radio" name="postsurvey[q14]" value="3" id="q143" required)
+                label(for="q143") 3
+              div(class="likert-item")
+                input(type="radio" name="postsurvey[q14]" value="4" id="q144" required)
+                label(for="q144") 4
+              div(class="likert-item")
+                input(type="radio" name="postsurvey[q14]" value="5" id="q145" required)
+                label(for="q145") 5
+        
+        div(class="field")
+          div(class="likert")
+            h2(class="subtitle likert-question has-text-weight-bold") I believe I have all the information needed to make informed choices about my life in Macao
+            div(class="level")
+              div(class="level-left")
+                div(class="level-item") Fully Disagree
+              div(class="level-right")
+                div(class="level-item") Fully Agree
+            
+            div(class="likert-scale")
+              div(class="likert-item")
+                input(type="radio" name="postsurvey[q15]" value="1" id="q151" required)
+                label(for="q151") 1
+              div(class="likert-item")
+                input(type="radio" name="postsurvey[q15]" value="2" id="q152" required)
+                label(for="q152") 2
+              div(class="likert-item")
+                input(type="radio" name="postsurvey[q15]" value="3" id="q153" required)
+                label(for="q153") 3
+              div(class="likert-item")
+                input(type="radio" name="postsurvey[q15]" value="4" id="q154" required)
+                label(for="q154") 4
+              div(class="likert-item")
+                input(type="radio" name="postsurvey[q15]" value="5" id="q155" required)
+                label(for="q155") 5
+
+        h2(class="subtitle has-text-weight-bold") I will buy a 3D Printer myself in the near future
+
+        div(class="field")
+          input(type="radio" name="postsurvey[q16]" value="Y" class="is-checkradio" id="postsurveyq16_1")  
+          label(class="radio" for="postsurveyq16_1") Yes
+
+        div(class="field")
+          input(type="radio" name="postsurvey[q16]" value="N" class="is-checkradio" id="postsurveyq16_2")  
+          label(class="radio" for="postsurveyq16_2") No
+
+        h2(class="subtitle has-text-weight-bold") I am willing to join an interview on my 3D printing experience for resarch purpose.  Please contact me by phone/email
+
+        div(class="field")
+          input(type="checkbox" name="postsurvey[q17]" value="Y" class="is-checkradio" id="postsurveyq17_1")  
+          label(class="radio" for="postsurveyq17_1") Yes
+
+        div
+          div(class="divider") END - Please Submit
+    
+        div(class="field has-text-right")
+          button(type="submit" class="button is-primary is-large") Submit
+
