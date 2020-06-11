@@ -33,6 +33,7 @@ const OrderSchema = new Schema({
   ],
   presurvey: {
     q0: String,
+    q01: String,
     q1: String,
     q2: String,
     q3: String,
@@ -54,6 +55,7 @@ const OrderSchema = new Schema({
     q91: Number,
     q92: Number,
     q10: Array,
+    q11: String,
   },
   postsurvey: {
     q1: String,

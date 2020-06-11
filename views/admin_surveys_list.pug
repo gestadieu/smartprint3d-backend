@@ -1,0 +1,46 @@
+extends admin_layout.pug
+
+block content 
+  div(class="columns")
+    div(class="column is-9")
+      h1(class="title") #{title}
+
+  table(class="table is-striped is-fullwidth is-narrow is-hoverable")
+    thead
+      tr
+        th Pre-Survey 
+        th Post-Survey
+        th(colspan="2") Timeline
+    tbody
+      each order in orders
+        tr
+          td(class="is-size-7")
+            ul
+            if order.presurvey
+              ul
+                each val, key in order.presurvey
+                  if key.charAt(0) == 'q'
+                    li= key + ': ' + val
+                else 
+                  li There are no values... ☹
+
+          td(class="is-size-7")
+            if order.postsurvey
+              ul 
+                each val, key in order.postsurvey
+                  if key.charAt(0) == 'q'
+                    li= key + ': ' + val
+                else
+                  li There are no values yet ;-)
+            
+          td(class="timeline")
+            each ti in order.timeline 
+              span(class=(ti.status == '01.ORDERED')? "has-text-black":(ti.status == '02.PRINTING')?"has-text-info":(ti.status == '03.PRINTED')?"has-text-warning":(ti.status=='DELETED')?"has-text-danger":"has-text-success") #{ti.status} 
+              br
+          td(class="timeline")
+            each ti in order.timeline 
+              on
+              span #{ti.date.toDateString()} #{ti.date.getHours()}:#{ti.date.getMinutes()}
+              br
+      
+                

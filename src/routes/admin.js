@@ -164,6 +164,35 @@ router.get("/orders/:id/flag/:flag", async (request, response) => {
 /**
  *
  */
+router.get("/surveys", async (request, response) => {
+  const filters = { status: { $ne: "DELETED" } };
+
+  try {
+    // if (search) {
+    //   filters.$or = [
+    //     { email: { $regex: search, $options: "i" } },
+    //     { mobile: { $regex: search, $options: "i" } },
+    //     { "items.item": { $regex: search, $options: "i" } },
+    //     { status: { $regex: search, $options: "i" } },
+    //   ];
+    // }
+
+    const orders = await Order.find(filters).sort({
+      created_at: 1,
+    });
+
+    response.render("admin_surveys_list", {
+      orders,
+      title: "Surveys",
+    });
+  } catch (err) {
+    response.status(400).send({ status: "error", message: error });
+  }
+});
+
+/**
+ *
+ */
 router.get("/users", async (request, response) => {
   try {
     const users = await User.find();
