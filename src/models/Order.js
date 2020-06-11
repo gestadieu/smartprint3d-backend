@@ -102,6 +102,7 @@ OrderSchema.method({
   /**
    *
    * @param {String} flag
+   * @param {User} user
    * 1 test if newFlag is allowed, 2 check if it is in the right order, 3 update timeline
    */
   updateFlag: function (flag, user) {
