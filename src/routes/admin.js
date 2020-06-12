@@ -4,7 +4,7 @@ const login = require("connect-ensure-login");
 const { Order } = require("../models/Order");
 const User = require("../models/User");
 const url = require("url");
-const PAGE_SIZE = 3;
+const PAGE_SIZE = 20;
 
 router.all("/*", login.ensureLoggedIn("/login"), function (req, res, next) {
   next();
