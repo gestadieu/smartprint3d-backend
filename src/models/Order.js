@@ -142,13 +142,26 @@ OrderSchema.method({
       }
     }
   },
-
-  /**
-   * buildSearchQ
-   * @param {Array} filters
-   */
-  buildSearchQuery: function (filters) {},
 });
+
+/**
+ *
+ * @param {String} search
+ */
+OrderSchema.query.bySearch = function (search) {
+  if (search) {
+    return this.where({
+      $or: [
+        { email: { $regex: search, $options: "i" } },
+        { mobile: { $regex: search, $options: "i" } },
+        { "items.item": { $regex: search, $options: "i" } },
+        { status: { $regex: search, $options: "i" } },
+      ],
+    });
+  } else {
+    return this.where();
+  }
+};
 
 const Order = mongoose.model("Order", OrderSchema);
 

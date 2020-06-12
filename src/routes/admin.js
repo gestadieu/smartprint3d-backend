@@ -48,24 +48,20 @@ router.get("/orders", async (request, response) => {
   const url_page = `${request.protocol}://${request.headers.host}${request.baseUrl}${request.path}`;
 
   const { search } = request.query;
-  const filters = {
-    $and: [{ status: { $ne: "04.DELIVERED" } }, { status: { $ne: "DELETED" } }],
-  };
 
   try {
-    if (search) {
-      filters.$or = [
-        { email: { $regex: search, $options: "i" } },
-        { mobile: { $regex: search, $options: "i" } },
-        { "items.item": { $regex: search, $options: "i" } },
-        { status: { $regex: search, $options: "i" } },
-      ];
-    }
-
-    const orders = await Order.find(filters).sort({
-      status: 1,
-      updated_at: 1,
-    });
+    const orders = await Order.find({
+      $and: [
+        { status: { $ne: "04.DELIVERED" } },
+        { status: { $ne: "DELETED" } },
+      ],
+    })
+      .bySearch(search)
+      .populate({ path: "timeline.user", select: "username" })
+      .sort({
+        status: 1,
+        updated_at: 1,
+      });
 
     response.render("admin_orders_list", {
       orders,
@@ -84,19 +80,14 @@ router.get("/pastorders", async (request, response) => {
   const url_api = `${request.protocol}://${request.headers.host}${request.originalUrl}/`;
   const url_page = `${request.protocol}://${request.headers.host}${request.baseUrl}${request.path}`;
   const { search } = request.query;
-  const filters = { status: "04.DELIVERED" };
 
   try {
-    if (search) {
-      filters.$or = [
-        { email: { $regex: search, $options: "i" } },
-        { mobile: { $regex: search, $options: "i" } },
-        { "items.item": { $regex: search, $options: "i" } },
-      ];
-    }
-    const orders = await Order.find(filters).sort({
-      created_at: -1,
-    });
+    const orders = await Order.find({ status: "04.DELIVERED" })
+      .bySearch(search)
+      .populate({ path: "timeline.user", select: "username" })
+      .sort({
+        created_at: -1,
+      });
     response.render("admin_orders_list", {
       orders,
       url_api,
@@ -117,19 +108,14 @@ router.get("/deletedorders", async (request, response) => {
   const url_api = `${request.protocol}://${request.headers.host}${request.originalUrl}/`;
   const url_page = `${request.protocol}://${request.headers.host}${request.baseUrl}${request.path}`;
   const { search } = request.query;
-  const filters = { status: "DELETED" };
 
   try {
-    if (search) {
-      filters.$or = [
-        { email: { $regex: search, $options: "i" } },
-        { mobile: { $regex: search, $options: "i" } },
-        { "items.item": { $regex: search, $options: "i" } },
-      ];
-    }
-    const orders = await Order.find(filters).sort({
-      created_at: -1,
-    });
+    const orders = await Order.find({ status: "DELETED" })
+      .bySearch(search)
+      .populate({ path: "timeline.user", select: "username" })
+      .sort({
+        created_at: -1,
+      });
     response.render("admin_orders_list", {
       orders,
       url_api,

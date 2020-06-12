@@ -68,11 +68,15 @@ block content
             each ti in order.timeline 
               span(class=(ti.status == '01.ORDERED')? "has-text-black":(ti.status == '02.PRINTING')?"has-text-info":(ti.status == '03.PRINTED')?"has-text-warning":(ti.status=='DELETED')?"has-text-danger":"has-text-success") #{ti.status} 
               br
+
           td(class="timeline")
             each ti in order.timeline 
               on
-              span #{ti.date.toDateString()} #{ti.date.getHours()}:#{ti.date.getMinutes()}
+              span #{ti.date.toDateString()} #{ti.date.getHours()}:#{ti.date.getMinutes()} 
+              if ti.status != '01.ORDERED'
+                span by #{ti.user.username}
               br
+            
           if page != 'past'
             td(class="actions")
               if page != 'deleted'
@@ -88,7 +92,7 @@ block content
           td 
             div.buttons.is-centered
               if order.status != 'DELETED'
-                a(href=url_api + order._id + "/flag/deleted" class="button is-danger is-small")
+                a(href=`/admin/orders/${order._id}/flag/deleted` class="button is-danger is-small")
                   span(class="icon")
                     i(class="fas fa-ban")
               else 
@@ -97,5 +101,17 @@ block content
                     i(class="fas fa-undo")
 
 
-                
-                
+  <nav class="pagination is-small" role="navigation" aria-label="pagination">
+    <a class="pagination-previous">Previous</a>
+    <a class="pagination-next">Next page</a>
+    <ul class="pagination-list">
+      <li><a class="pagination-link" aria-label="Goto page 1">1</a></li>
+      <li><span class="pagination-ellipsis">&hellip;</span></li>
+      <li><a class="pagination-link" aria-label="Goto page 45">45</a></li>
+      <li><a class="pagination-link is-current" aria-label="Page 46" aria-current="page">46</a></li>
+      <li><a class="pagination-link" aria-label="Goto page 47">47</a></li>
+      <li><span class="pagination-ellipsis">&hellip;</span></li>
+      <li><a class="pagination-link" aria-label="Goto page 86">86</a></li>
+    </ul>
+  </nav>
+                  
