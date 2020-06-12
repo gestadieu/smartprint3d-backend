@@ -147,8 +147,6 @@ router.get("/deletedorders", async (request, response) => {
  *
  */
 router.get("/orders/:id/flag/:flag", async (request, response) => {
-  // const id = request.params.id;
-  // const flag = request.params.flag;
   const { id, flag } = request.params;
 
   try {
@@ -167,12 +165,31 @@ router.get("/orders/:id/flag/:flag", async (request, response) => {
  */
 router.get("/orders/:id/online", async (request, response) => {
   const { id } = request.params;
-  console.log(id);
+
   try {
     const order = await Order.findById(id);
-    console.log(order.is_online);
     order.is_online = !order.is_online;
     await order.save();
+    response.redirect("/admin/orders");
+  } catch (err) {
+    response.status(400).send({ status: "error", message: error });
+  }
+});
+
+/**
+ *
+ */
+router.get("/orders/:id/restore", async (request, response) => {
+  const { id } = request.params;
+
+  try {
+    const order = await Order.findById(id);
+    if (order.status == "DELETED") {
+      order.status = order.lastActiveStatus();
+      order.updateFlag(order.status, request.user);
+      await order.save();
+    }
+
     response.redirect("/admin/orders");
   } catch (err) {
     response.status(400).send({ status: "error", message: error });

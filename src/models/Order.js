@@ -132,6 +132,18 @@ OrderSchema.method({
   },
 
   /**
+   * lastActiveStatus
+   * returns the last status not 'DELETED'
+   */
+  lastActiveStatus: function () {
+    for (let i = this.timeline.length - 1; i >= 0; i--) {
+      if (this.timeline[i].status !== "DELETED") {
+        return this.timeline[i].status;
+      }
+    }
+  },
+
+  /**
    * buildSearchQ
    * @param {Array} filters
    */
