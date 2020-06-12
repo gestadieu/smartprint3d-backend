@@ -17,23 +17,20 @@ block content
     thead
       tr
         th Contact / Order #
-        th 
         th Online
         th Order 
         th Status 
         th(colspan="2") Timeline
         if page != 'past'
-          th Action
-          th Delete
+          th.has-text-centered Action
+        th.has-text-centered 
+          if (page == 'deleted')
+            span.has-text-success RESTORE
+          else 
+            span.has-text-danger Delete
     tbody
       each order in orders
         tr
-          td 
-            a(href="/api/orders/" + order._id  class="button is-small is-light" target="postsurvey") 
-              if order.status == '03.PRINTED' 
-                span.has-text-primary POST-SURVEY 
-              else 
-                span STATUS
           td(style="font-size:0.5rem")
             span #{order.email} 
             if order.email
@@ -55,16 +52,17 @@ block content
               br
           td
             p(class="field")
-              if order.status == '01.ORDERED'
-                span(class="tag is-black is-light")=order.status
-              else if order.status == '02.PRINTING'
-                span(class="tag is-info is-light")=order.status
-              else if order.status == '03.PRINTED'
-                span(class="tag is-warning is-light")=order.status
-              else if order.status == '04.DELIVERED'
-                span(class="tag is-success is-light")=order.status  
-              else if order.status == 'DELETED'
-                span(class="tag is-danger is-light")=order.status  
+              a(href=`/api/orders/${order._id}`)
+                if order.status == '01.ORDERED'
+                  span(class="tag is-black is-light")=order.status
+                else if order.status == '02.PRINTING'
+                  span(class="tag is-info is-light")=order.status
+                else if order.status == '03.PRINTED'
+                  span(class="tag is-warning is-light")=order.status
+                else if order.status == '04.DELIVERED'
+                  span(class="tag is-success is-light")=order.status  
+                else if order.status == 'DELETED'
+                  span(class="tag is-danger is-light")=order.status  
           
           td(class="timeline")
             each ti in order.timeline 
@@ -82,11 +80,11 @@ block content
                   if order.status == '01.ORDERED'
                     a(href=url_api + order._id +"/flag/02.printing" class="button is-info is-small") PRINTING&raquo;
                   else if order.status == '02.PRINTING'
-                    a(href=url_api + order._id +"/flag/01.ordered" class="button is-black") &laquo;ORDERED 
-                    a(href=url_api + order._id +"/flag/03.printed" class="button is-warning") PRINTED&raquo;
+                    a(href=`${url_api}${order._id}/flag/01.ordered` class="button is-black") &laquo;ORDERED 
+                    a(href=`${url_api}${order._id}/flag/03.printed` class="button is-warning") PRINTED&raquo;
                   else if order.status == '03.PRINTED'
-                    a(href=url_api + order._id +"/flag/02.printing" class="button is-info is-small") &laquo;PRINTING
-                    a(href=`/admin/postsurvey/${order._id}` class="button is-success is-light is-small") DELIVERING&raquo;
+                    a(href=`${url_api}${order._id}/flag/02.printing` class="button is-info is-small") &laquo;PRINTING
+                    a(href=`/admin/postsurvey/${order._id}` class="button is-success is-light is-small" target="postsurvey") DELIVERING&raquo;
           td 
             div.buttons.is-centered
               if order.status != 'DELETED'
@@ -94,7 +92,7 @@ block content
                   span(class="icon")
                     i(class="fas fa-ban")
               else 
-                a(href='/admin/orders/' + order._id + "/restore" class="button is-success is-small")
+                a(href=`/admin/orders/${order._id}/restore` class="button is-success is-small")
                   span(class="icon")
                     i(class="fas fa-undo")
 
