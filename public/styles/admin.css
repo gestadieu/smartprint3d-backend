@@ -29,3 +29,8 @@ td.actions .tags {
 .subtitle {
   margin-top: 30px;
 }
+
+.table-header1 {
+  background-color: gray;
+  color: #fafafa;
+}

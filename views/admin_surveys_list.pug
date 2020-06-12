@@ -5,42 +5,119 @@ block content
     div(class="column is-9")
       h1(class="title") #{title}
 
-  table(class="table is-striped is-fullwidth is-narrow is-hoverable")
-    thead
-      tr
-        th Pre-Survey 
-        th Post-Survey
-        th(colspan="2") Timeline
-    tbody
-      each order in orders
-        tr
-          td(class="is-size-7")
-            ul
-            if order.presurvey
-              ul
-                each val, key in order.presurvey
-                  if key.charAt(0) == 'q'
-                    li= key + ': ' + val
-                else 
-                  li There are no values... ☹
+  div.table-container
+    table(class="table is-fullwidth is-striped is-bordered is-narrow is-hoverable")
+      thead
+        tr(class="table-header1")
+          th Date 
+          th Contact
+          th(colspan=24) Pre-Survey 
+          th(colspan=18) Post-Survey
+        tr 
+          th 
+          th 
+          //- PRESURVEY
+          th Q1
+          th Q2 
+          th Q3
+          th Q4 
+          th Q5
+          th Q6 
+          th Q7a
+          th Q7b
+          th Q7c
+          th Q7d
+          th Q7e
+          th Q7f
+          th Q7g
+          th Q8 
+          th Q9
+          th Q10a 
+          th Q10b
+          th Q10c
+          th Q10e
+          th Q10f
+          th Q11
+          th Q12
+          th Q13
+          th Q14 
+          //- POST SURVEY
+          th Q1
+          th Q2
+          th Q3
+          th Q4 
+          th Q5 
+          th Q6
+          th Q7a
+          th Q7b 
+          th Q8 
+          th Q9
+          th Q10 
+          th Q11a
+          th Q11b 
+          th Q11c 
+          th Q11d 
+          th Q11f 
+          th Q12 
+          th Q13
+      tbody
+        each order in orders
+          tr.is-size-7  
+            td #{order.created_at.toDateString()}  
+            td 
+              span #{order.email} 
+              if order.email
+                br
+              span #{order.mobile}
+            if order['presurvey']
+              - var ps = order['presurvey']
+              td=ps.q0
+              td=ps.q01 
+              td=ps.q1 
+              td=ps.q2
+              td=ps.q3
+              td=ps.q4
+              td=ps.q51
+              td=ps.q52 
+              td=ps.q53 
+              td=ps.q54 
+              td=ps.q55 
+              td=ps.q56 
+              td=ps.q57 
+              td=ps.q6 
+              td=ps.q7 
+              td=ps.q80 
+              td=ps.q81 
+              td=ps.q82 
+              td=ps.q83 
+              td=ps.q84 
+              td=ps.q91 
+              td=ps.q92 
+              td=ps.q10 
+              td=ps.q11 
+            if order['postsurvey']
+              - var po = order['postsurvey']
+              td=po.q1 
+              td=po.q2 
+              td=po.q3 
+              td=po.q4 
+              td=po.q5 
+              td=po.q6 
+              td=po.q7a 
+              td=po.q7b 
+              td=po.q8 
+              td=po.q9 
+              td=po.q10 
+              td=po.q11 
+              td=po.q12
+              td=po.q13 
+              td=po.q14 
+              td=po.q15 
+              td=po.q16 
+              td=po.q17  
 
-          td(class="is-size-7")
-            if order.postsurvey
-              ul 
-                each val, key in order.postsurvey
-                  if key.charAt(0) == 'q'
-                    li= key + ': ' + val
-                else
-                  li There are no values yet ;-)
-            
-          td(class="timeline")
-            each ti in order.timeline 
-              span(class=(ti.status == '01.ORDERED')? "has-text-black":(ti.status == '02.PRINTING')?"has-text-info":(ti.status == '03.PRINTED')?"has-text-warning":(ti.status=='DELETED')?"has-text-danger":"has-text-success") #{ti.status} 
-              br
-          td(class="timeline")
-            each ti in order.timeline 
-              on
-              span #{ti.date.toDateString()} #{ti.date.getHours()}:#{ti.date.getMinutes()}
-              br
+
+
+
       
                 
