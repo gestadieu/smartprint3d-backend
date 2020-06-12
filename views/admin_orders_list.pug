@@ -29,7 +29,11 @@ block content
       each order in orders
         tr
           td 
-            a(href="/api/orders/" + order._id  class="button is-small is-light" target="postsurvey") STATUS
+            a(href="/api/orders/" + order._id  class="button is-small is-light" target="postsurvey") 
+              if order.status == '03.PRINTED' 
+                span.has-text-primary POST-SURVEY 
+              else 
+                span STATUS
           td(style="font-size:0.5rem")
             span #{order.email} 
             if order.email
