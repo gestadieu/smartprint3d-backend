@@ -4,6 +4,7 @@ const login = require("connect-ensure-login");
 const { Order } = require("../models/Order");
 const User = require("../models/User");
 const url = require("url");
+const PAGE_SIZE = 3;
 
 router.all("/*", login.ensureLoggedIn("/login"), function (req, res, next) {
   next();
@@ -47,29 +48,33 @@ router.get("/orders", async (request, response) => {
   const url_api = `${request.protocol}://${request.headers.host}${request.originalUrl}/`;
   const url_page = `${request.protocol}://${request.headers.host}${request.baseUrl}${request.path}`;
 
-  const { search } = request.query;
+  const { search, page = 1, limit = PAGE_SIZE } = request.query;
+  const filters = {
+    $and: [{ status: { $ne: "04.DELIVERED" } }, { status: { $ne: "DELETED" } }],
+  };
 
   try {
-    const orders = await Order.find({
-      $and: [
-        { status: { $ne: "04.DELIVERED" } },
-        { status: { $ne: "DELETED" } },
-      ],
-    })
-      .bySearch(search)
+    const orders = await Order.find()
+      .bySearch(filters, search)
       .populate({ path: "timeline.user", select: "username" })
+      .limit(limit * 1)
+      .skip(limit * (page - 1))
       .sort({
         status: 1,
         updated_at: 1,
       });
+    const total = await Order.countDocuments().bySearch(filters, search);
 
     response.render("admin_orders_list", {
       orders,
       url_api,
       url_page,
       title: "Active Orders",
-      page: "active",
+      page_name: "active",
       search,
+      page,
+      limit,
+      totalPages: Math.ceil(total / limit),
     });
   } catch (error) {
     response.status(400).send({ status: "error", message: error });
@@ -79,22 +84,30 @@ router.get("/orders", async (request, response) => {
 router.get("/pastorders", async (request, response) => {
   const url_api = `${request.protocol}://${request.headers.host}${request.originalUrl}/`;
   const url_page = `${request.protocol}://${request.headers.host}${request.baseUrl}${request.path}`;
-  const { search } = request.query;
+  const { search, page = 1, limit = PAGE_SIZE } = request.query;
+  const filters = { status: "04.DELIVERED" };
 
   try {
-    const orders = await Order.find({ status: "04.DELIVERED" })
-      .bySearch(search)
+    const orders = await Order.find()
+      .bySearch(filters, search)
       .populate({ path: "timeline.user", select: "username" })
+      .limit(limit * 1)
+      .skip(limit * (page - 1))
       .sort({
         created_at: -1,
       });
+    const total = await Order.countDocuments().bySearch(filters, search);
+
     response.render("admin_orders_list", {
       orders,
       url_api,
       url_page,
       title: "Orders Completed",
-      page: "past",
+      page_name: "past",
       search,
+      page,
+      limit,
+      totalPages: Math.ceil(total / limit),
     });
   } catch (error) {
     response.status(400).send({ status: "error", message: error });
@@ -107,22 +120,29 @@ router.get("/pastorders", async (request, response) => {
 router.get("/deletedorders", async (request, response) => {
   const url_api = `${request.protocol}://${request.headers.host}${request.originalUrl}/`;
   const url_page = `${request.protocol}://${request.headers.host}${request.baseUrl}${request.path}`;
-  const { search } = request.query;
+  const { search, page = 1, limit = PAGE_SIZE } = request.query;
+  const filters = { status: "DELETED" };
 
   try {
-    const orders = await Order.find({ status: "DELETED" })
-      .bySearch(search)
+    const orders = await Order.find()
+      .bySearch(filters, search)
       .populate({ path: "timeline.user", select: "username" })
+      .limit(limit * 1)
+      .skip(limit * (page - 1))
       .sort({
         created_at: -1,
       });
+    const total = await Order.countDocuments().bySearch(filters, search);
     response.render("admin_orders_list", {
       orders,
       url_api,
       url_page,
       title: "Orders Deleted",
-      page: "deleted",
+      page_name: "deleted",
       search,
+      page,
+      limit,
+      totalPages: Math.ceil(total / limit),
     });
   } catch (error) {
     response.status(400).send({ status: "error", message: error });

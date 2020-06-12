@@ -148,18 +148,17 @@ OrderSchema.method({
  *
  * @param {String} search
  */
-OrderSchema.query.bySearch = function (search) {
+OrderSchema.query.bySearch = function (filters, search) {
   if (search) {
-    return this.where({
-      $or: [
-        { email: { $regex: search, $options: "i" } },
-        { mobile: { $regex: search, $options: "i" } },
-        { "items.item": { $regex: search, $options: "i" } },
-        { status: { $regex: search, $options: "i" } },
-      ],
-    });
+    filters.$or = [
+      { email: { $regex: search, $options: "i" } },
+      { mobile: { $regex: search, $options: "i" } },
+      { "items.item": { $regex: search, $options: "i" } },
+      { status: { $regex: search, $options: "i" } },
+    ];
+    return this.where(filters);
   } else {
-    return this.where();
+    return this.where(filters);
   }
 };
 

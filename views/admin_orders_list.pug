@@ -1,6 +1,7 @@
 extends admin_layout.pug
 
 block content 
+
   form(method="get")
     div(class="columns")
       div(class="column is-9")
@@ -21,10 +22,10 @@ block content
         th Order 
         th Status 
         th(colspan="2") Timeline
-        if page != 'past'
+        if page_name != 'past'
           th.has-text-centered Action
         th.has-text-centered 
-          if (page == 'deleted')
+          if (page_name == 'deleted')
             span.has-text-success RESTORE
           else 
             span.has-text-danger Delete
@@ -77,9 +78,9 @@ block content
                 span by #{ti.user.username}
               br
             
-          if page != 'past'
+          if page_name != 'past'
             td(class="actions")
-              if page != 'deleted'
+              if page_name != 'deleted'
                 div.buttons.are-small.has-addons.is-centered
                   if order.status == '01.ORDERED'
                     a(href=url_api + order._id +"/flag/02.printing" class="button is-info is-small") PRINTING&raquo;
@@ -101,17 +102,18 @@ block content
                     i(class="fas fa-undo")
 
 
-  <nav class="pagination is-small" role="navigation" aria-label="pagination">
-    <a class="pagination-previous">Previous</a>
-    <a class="pagination-next">Next page</a>
-    <ul class="pagination-list">
-      <li><a class="pagination-link" aria-label="Goto page 1">1</a></li>
-      <li><span class="pagination-ellipsis">&hellip;</span></li>
-      <li><a class="pagination-link" aria-label="Goto page 45">45</a></li>
-      <li><a class="pagination-link is-current" aria-label="Page 46" aria-current="page">46</a></li>
-      <li><a class="pagination-link" aria-label="Goto page 47">47</a></li>
-      <li><span class="pagination-ellipsis">&hellip;</span></li>
-      <li><a class="pagination-link" aria-label="Goto page 86">86</a></li>
-    </ul>
-  </nav>
+  nav.pagination.is-small(role="naviation" aria-label="pagination")
+    if page > 1
+      a.pagination-previous(href=`${url_page}?page=${page*1 - 1}&limit=${limit}`) &laquo;Previous
+    else 
+      a.pagination-previous(disabled) Previous&laquo;
+    
+    if page < totalPages 
+      a.pagination-next(href=`${url_page}?page=${page*1 + 1}&limit=${limit}`)  Next&raquo;
+    else 
+      a.pagination-next(disabled)  Next&raquo;
+    ul.pagination-list 
+      li 
+        a.pagination-link.is-current(aria-label=`Page ${page}`)=page
+
                   
