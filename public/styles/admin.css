@@ -22,8 +22,9 @@ td.timeline {
   font-size: .60rem;
 }
 
-td.actions .tags {
-  justify-content: flex-end;
+table td.actions {
+  /* justify-content: flex-end; */
+  text-align: right;
 }
 
 .subtitle {

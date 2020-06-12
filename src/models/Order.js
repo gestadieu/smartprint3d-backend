@@ -4,6 +4,10 @@ var Schema = mongoose.Schema;
 const OrderSchema = new Schema({
   email: String,
   mobile: String,
+  is_online: {
+    type: Boolean,
+    default: true,
+  },
   items: [
     {
       item: {

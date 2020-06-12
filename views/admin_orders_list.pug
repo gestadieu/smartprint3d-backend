@@ -16,24 +16,34 @@ block content
   table(class="table is-striped is-fullwidth is-narrow")
     thead
       tr
-        th Order #
-        th Contact 
+        th Contact / Order #
+        th 
+        th Online
         th Order 
         th Status 
         th(colspan="2") Timeline
         if page != 'past'
           th Action
+          th Delete
     tbody
       each order in orders
         tr
-          td(class="is-size-7")
-            a(href="/qrcodes/" + order._id + ".png") #{order._id}
-          td(class="is-size-7")
+          td 
+            a(href="/api/orders/" + order._id  class="button is-small is-light" target="postsurvey") STATUS
+          td(style="font-size:0.5rem")
             span #{order.email} 
             if order.email
               br
             span #{order.mobile}
-
+            br 
+            a(href="/qrcodes/" + order._id + ".png") #{order._id}
+          td(class="is-size-7")
+            if order.is_online 
+              span ONLINE 
+            else 
+              span ON-SITE
+            br 
+            a(href=`${url_api}${order._id}/online`) swap
           td(class="is-size-7")
             each it in order.items
               span #{it.qty} x 
@@ -42,15 +52,15 @@ block content
           td
             p(class="field")
               if order.status == '01.ORDERED'
-                span(class="tag is-black")=order.status
+                span(class="tag is-black is-light")=order.status
               else if order.status == '02.PRINTING'
-                span(class="tag is-info")=order.status
+                span(class="tag is-info is-light")=order.status
               else if order.status == '03.PRINTED'
-                span(class="tag is-warning")=order.status
+                span(class="tag is-warning is-light")=order.status
               else if order.status == '04.DELIVERED'
-                span(class="tag is-success")=order.status  
+                span(class="tag is-success is-light")=order.status  
               else if order.status == 'DELETED'
-                span(class="tag is-danger")=order.status  
+                span(class="tag is-danger is-light")=order.status  
           
           td(class="timeline")
             each ti in order.timeline 
@@ -64,43 +74,27 @@ block content
           if page != 'past'
             td(class="actions")
               if page != 'deleted'
-                div(class="dropdown")
-                  div(class="dropdown-trigger")
-                    button(class="button is-small" aria-haspopup="true" aria-controls="dropdown-menu-"+order._id)
-                      span Actions 
-                      span(class="icon is-small")
-                        i(class="fas fa-angle-down" aria-hidden="true")
-                  div(class="dropdown-menu" role="menu" id="dropdown-menu-"+order._id)
-                    div(class="dropdown-content")
-                      a(href="/api/orders/" + order._id  class="dropdown-item" target="postsurvey") STATUS
-                      if order.status == '01.ORDERED'
-                        a(href=url_api + order._id +"/flag/02.printing" class="dropdown-item") PRINTING 
-                      else if order.status == '02.PRINTING'
-                        a(href=url_api + order._id +"/flag/03.printed" class="dropdown-item") PRINTED 
-                      else if order.status == '03.PRINTED'
-                        a(href=url_api + order._id +"/flag/04.delivered" class="dropdown-item") 
-                          span(class="icon") 
-                            i(class="fas fa-exclamation-triangle")
-                          span Delivering
-                      hr(class="dropdown-divider")
-                      a(href=url_api + order._id + "/flag/deleted" class="dropdown-item is-danger")
-                        span(class="icon")
-                          i(class="fas fa-ban")
-                        span Delete 
-
-              //- div(class="buttons are-small has-addons")
-                a(href="/api/orders/" + order._id class="button" target="postsurvey") STATUS 
-                if order.status == 'ORDERED'
-                  a(href=url_api + order._id +"/flag/printing" class="button") PRINTING &raquo;
-                else if order.status == 'PRINTING'
-                  a(href=url_api + order._id +"/flag/printed" class="button") PRINTED &raquo;
-                else if order.status == 'PRINTED'
-                  a(href=url_api + order._id +"/flag/delivered" class="button is-warning") 
-                    span(class="icon") 
-                      i(class="fas fa-exclamation-triangle")
-                    span Delivering
-                a(href=url_api + order._id + "/delete" class="button is-danger")
+                div.buttons.are-small.has-addons.is-centered
+                  if order.status == '01.ORDERED'
+                    a(href=url_api + order._id +"/flag/02.printing" class="button is-info is-small") PRINTING&raquo;
+                  else if order.status == '02.PRINTING'
+                  
+                    a(href=url_api + order._id +"/flag/01.ordered" class="button is-black") &laquo;ORDERED 
+                    a(href=url_api + order._id +"/flag/03.printed" class="button is-warning") PRINTED&raquo;
+                  else if order.status == '03.PRINTED'
+                    a(href=url_api + order._id +"/flag/02.printing" class="button is-info is-small") &laquo;PRINTING
+          
+          td 
+            div.buttons.is-centered
+              if order.status != 'DELETED'
+                a(href=url_api + order._id + "/flag/deleted" class="button is-danger is-small")
                   span(class="icon")
                     i(class="fas fa-ban")
-                  span Delete 
+              else 
+                a(href='/admin/orders/' + order._id + "/flag/01.ordered" class="button is-success is-small")
+                  span(class="icon")
+                    i(class="fas fa-undo")
+
+
+                
                 
