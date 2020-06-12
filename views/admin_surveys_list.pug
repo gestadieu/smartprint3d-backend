@@ -63,8 +63,8 @@ block content
       tbody
         each order in orders
           tr.is-size-7  
-            td #{order.created_at.toDateString()}  
-            td 
+            td(style="font-size:0.5rem") #{order.created_at.toDateString()}  
+            td(style="font-size:0.5rem")
               span #{order.email} 
               if order.email
                 br
