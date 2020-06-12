@@ -82,12 +82,11 @@ block content
                   if order.status == '01.ORDERED'
                     a(href=url_api + order._id +"/flag/02.printing" class="button is-info is-small") PRINTING&raquo;
                   else if order.status == '02.PRINTING'
-                  
                     a(href=url_api + order._id +"/flag/01.ordered" class="button is-black") &laquo;ORDERED 
                     a(href=url_api + order._id +"/flag/03.printed" class="button is-warning") PRINTED&raquo;
                   else if order.status == '03.PRINTED'
                     a(href=url_api + order._id +"/flag/02.printing" class="button is-info is-small") &laquo;PRINTING
-          
+                    a(href=`/admin/postsurvey/${order._id}` class="button is-success is-light is-small") DELIVERING&raquo;
           td 
             div.buttons.is-centered
               if order.status != 'DELETED'
