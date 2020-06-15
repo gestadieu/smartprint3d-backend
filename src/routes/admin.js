@@ -4,6 +4,7 @@ const login = require("connect-ensure-login");
 const { Order } = require("../models/Order");
 const User = require("../models/User");
 const url = require("url");
+const { sendEmail, sendEmailPrinted } = require("../models/Mail");
 const PAGE_SIZE = 20;
 
 router.all("/*", login.ensureLoggedIn("/login"), function (req, res, next) {
@@ -160,6 +161,9 @@ router.get("/orders/:id/flag/:flag", async (request, response) => {
     const order = await Order.findById(id);
     await order.updateFlag(flag, request.user);
     await order.save();
+    if (order.status == "03.PRINTED" && order.email) {
+      sendEmail(sendEmailPrinted(order));
+    }
     response.redirect("/admin/orders");
   } catch (error) {
     console.log(error);

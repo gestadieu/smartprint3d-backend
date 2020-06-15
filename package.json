@@ -31,6 +31,7 @@
     "express-formidable": "^1.2.0",
     "express-jwt": "^5.3.3",
     "express-session": "^1.17.1",
+    "googleapis": "^52.1.0",
     "helmet": "^3.22.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.15",
