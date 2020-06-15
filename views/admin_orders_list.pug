@@ -104,12 +104,12 @@ block content
 
   nav.pagination.is-small(role="naviation" aria-label="pagination")
     if page > 1
-      a.pagination-previous(href=`${url_page}?page=${page*1 - 1}&limit=${limit}`) &laquo;Previous
+      a.pagination-previous(href=`/admin/${url_query}&page=${page*1 - 1}&limit=${limit}`) &laquo;Previous
     else 
       a.pagination-previous(disabled) Previous&laquo;
     
     if page < totalPages 
-      a.pagination-next(href=`${url_page}?page=${page*1 + 1}&limit=${limit}`)  Next&raquo;
+      a.pagination-next(href=`/admin/${url_query}&page=${page*1 + 1}&limit=${limit}`)  Next&raquo;
     else 
       a.pagination-next(disabled)  Next&raquo;
     ul.pagination-list 
@@ -120,4 +120,6 @@ block content
       li 
         span / #{totalPages}
 
-                  
+
+  p=url_api
+  p=url_page

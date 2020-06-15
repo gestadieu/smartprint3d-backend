@@ -69,6 +69,7 @@ router.get("/orders", async (request, response) => {
       orders,
       url_api,
       url_page,
+      url_query: request.url,
       title: "Active Orders",
       page_name: "active",
       search,
