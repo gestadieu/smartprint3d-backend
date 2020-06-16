@@ -27,7 +27,32 @@ exports.sendEmail = (mailOptions) =>
     });
   });
 
-exports.sendEmailPrinted = (order) => {
+exports.emailOrderConfirmation = (order) => {
+  return {
+    from: "SmartPrint3D <smartprint3d.io@gmail.com>",
+    to: order.email,
+    subject: `智打印3D」SmartPrint3D - Order#${order._id}`,
+    html: `<div style="text-align:center">
+      <a href="https://www.smartprint3d.io/">
+        <img src="https://api.smartprint3d.io/images/logo-smartprint3d.jpg"/ style="width:128px;">
+      </a>
+    </div>
+    <p>感謝您體驗「智打印3D」。這是一個把先進科技帶進社區的項目，由科技發展委員會資 助，澳門智慧城市概念下的其中一步。
+      您的訂單已安全發送並確認！在一週內，我們會把提取您的3D打印品之詳細資料發給您 。請密切期待！
+    </p> 
+    <p>Thank you for experiencing the Smart Print 3D, a project funded by FDCT and being part of the Macau Smart City project.
+      Your order is well received and confirmed. We will send you the details to collect your 3D object within one week. Please look forward to!
+    </p>
+    <p style="text-align:center;">
+      <a href="https://api.smartprint3d.io/api/orders/${order._id}">
+        <img src="https://api.smartprint3d.io/qrcodes/${order._id}.png"/>
+      </a>
+    </p>
+     `,
+  };
+};
+
+exports.emailPrinted = (order) => {
   return {
     from: "SmartPrint3D <smartprint3d.io@gmail.com>",
     to: order.email,

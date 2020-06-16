@@ -3,6 +3,7 @@ const { Order } = require("../models/Order");
 const Survey = require("../models/Survey");
 const QRCode = require("qrcode");
 const mailer = require("nodemailer");
+const { sendEmail, emailOrderConfirmation } = require("../models/Mail");
 
 /**
  *
@@ -53,6 +54,10 @@ router.post("/orders", async (request, response) => {
       presurvey: data.presurvey,
     });
     await survey.save();
+
+    if (order["email"]) {
+      sendEmail(emailOrderConfirmation(order));
+    }
 
     const url_status = `${request.protocol}://${request.headers.host}/api/orders/${order._id}`;
     // generate a QRCode based on the document id url
