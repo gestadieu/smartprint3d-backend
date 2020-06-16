@@ -48,11 +48,16 @@ router.get("/", async (request, response) => {
 router.get("/orders", async (request, response) => {
   const url_api = `${request.protocol}://${request.headers.host}${request.originalUrl}/`;
   const url_page = `${request.protocol}://${request.headers.host}${request.baseUrl}${request.path}`;
+  const { search, status = "", page = 1, limit = PAGE_SIZE } = request.query;
 
-  const { search, page = 1, limit = PAGE_SIZE } = request.query;
-  const filters = {
+  let filters = {
     $and: [{ status: { $ne: "04.DELIVERED" } }, { status: { $ne: "DELETED" } }],
   };
+  if (status == "04.delivered") {
+    filters = { status: "04.DELIVERED" };
+  } else if (status == "deleted") {
+    filters = { status: "DELETED" };
+  }
 
   try {
     const orders = await Order.find()
@@ -62,7 +67,8 @@ router.get("/orders", async (request, response) => {
       .skip(limit * (page - 1))
       .sort({
         status: 1,
-        updated_at: 1,
+        updated_at: -1,
+        created_at: -1,
       });
     const total = await Order.countDocuments().bySearch(filters, search);
 
