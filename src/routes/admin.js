@@ -48,109 +48,52 @@ router.get("/", async (request, response) => {
 router.get("/orders", async (request, response) => {
   const url_api = `${request.protocol}://${request.headers.host}${request.originalUrl}/`;
   const url_page = `${request.protocol}://${request.headers.host}${request.baseUrl}${request.path}`;
-  const { search, status = "", page = 1, limit = PAGE_SIZE } = request.query;
+
+  const ordersParams = request.session.ordersParams || {};
+  ordersParams.page = request.query.page || ordersParams["page"] || 1;
+  ordersParams.limit =
+    request.query.limit || ordersParams["limit"] || PAGE_SIZE;
+  ordersParams.search = request.query.search || ordersParams["search"] || "";
+  ordersParams.status = request.query.status || ordersParams["status"] || "";
+  if (request.query.search == "") {
+    ordersParams.search = "";
+  }
+  if (request.query.status == "active") {
+    ordersParams.status = "";
+  }
+  request.session.ordersParams = ordersParams;
 
   let filters = {
     $and: [{ status: { $ne: "04.DELIVERED" } }, { status: { $ne: "DELETED" } }],
   };
-  if (status == "04.delivered") {
+  if (ordersParams.status == "04.delivered") {
     filters = { status: "04.DELIVERED" };
-  } else if (status == "deleted") {
+  } else if (ordersParams.status == "deleted") {
     filters = { status: "DELETED" };
   }
 
   try {
     const orders = await Order.find()
-      .bySearch(filters, search)
+      .bySearch(filters, ordersParams.search)
       .populate({ path: "timeline.user", select: "username" })
-      .limit(limit * 1)
-      .skip(limit * (page - 1))
+      .limit(ordersParams.limit * 1)
+      .skip(ordersParams.limit * (ordersParams.page - 1))
       .sort({
         status: 1,
         updated_at: -1,
         created_at: -1,
       });
-    const total = await Order.countDocuments().bySearch(filters, search);
+    const total = await Order.countDocuments().bySearch(
+      filters,
+      ordersParams.search
+    );
 
     response.render("admin_orders_list", {
       orders,
-      url_api,
       url_page,
-      url_query: request.url,
-      title: "Active Orders",
-      page_name: "active",
-      search,
-      page,
-      limit,
-      totalPages: Math.ceil(total / limit),
-    });
-  } catch (error) {
-    response.status(400).send({ status: "error", message: error });
-  }
-});
-
-router.get("/pastorders", async (request, response) => {
-  const url_api = `${request.protocol}://${request.headers.host}${request.originalUrl}/`;
-  const url_page = `${request.protocol}://${request.headers.host}${request.baseUrl}${request.path}`;
-  const { search, page = 1, limit = PAGE_SIZE } = request.query;
-  const filters = { status: "04.DELIVERED" };
-
-  try {
-    const orders = await Order.find()
-      .bySearch(filters, search)
-      .populate({ path: "timeline.user", select: "username" })
-      .limit(limit * 1)
-      .skip(limit * (page - 1))
-      .sort({
-        created_at: -1,
-      });
-    const total = await Order.countDocuments().bySearch(filters, search);
-
-    response.render("admin_orders_list", {
-      orders,
-      url_api,
-      url_page,
-      title: "Orders Completed",
-      page_name: "past",
-      search,
-      page,
-      limit,
-      totalPages: Math.ceil(total / limit),
-    });
-  } catch (error) {
-    response.status(400).send({ status: "error", message: error });
-  }
-});
-
-/**
- *
- */
-router.get("/deletedorders", async (request, response) => {
-  const url_api = `${request.protocol}://${request.headers.host}${request.originalUrl}/`;
-  const url_page = `${request.protocol}://${request.headers.host}${request.baseUrl}${request.path}`;
-  const { search, page = 1, limit = PAGE_SIZE } = request.query;
-  const filters = { status: "DELETED" };
-
-  try {
-    const orders = await Order.find()
-      .bySearch(filters, search)
-      .populate({ path: "timeline.user", select: "username" })
-      .limit(limit * 1)
-      .skip(limit * (page - 1))
-      .sort({
-        created_at: -1,
-      });
-    const total = await Order.countDocuments().bySearch(filters, search);
-    response.render("admin_orders_list", {
-      orders,
-      url_api,
-      url_page,
-      title: "Orders Deleted",
-      page_name: "deleted",
-      search,
-      page,
-      limit,
-      totalPages: Math.ceil(total / limit),
+      title: "Orders",
+      ordersParams,
+      total,
     });
   } catch (error) {
     response.status(400).send({ status: "error", message: error });
@@ -172,7 +115,6 @@ router.get("/orders/:id/flag/:flag", async (request, response) => {
     }
     response.redirect("/admin/orders");
   } catch (error) {
-    console.log(error);
     response.status(400).send({ status: "error", message: error });
   }
 });
