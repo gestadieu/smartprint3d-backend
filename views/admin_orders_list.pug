@@ -5,15 +5,21 @@ block content
   form(method="get")
     div(class="columns")
       div(class="column is-9")
-        h1(class="title") #{title}
+        h1(class="title") 
+          if ordersParams.status == 'deleted'
+            span  #{title} Deleted
+          else if ordersParams.status == '04.delivered'
+            span #{title} Canceled
+          else 
+            span Active #{title}
       div(class="column is-2")
-        input(class="input is-small" type="text" placeholder="Search Status, Contacts, Objects" name="search" value=search) 
+        input(class="input is-small" type="text" placeholder="Search Status, Contacts, Objects" name="search" value=ordersParams.search) 
       div(class="column is-1")
-        if search
-          a(class="button is-small is-danger" href=url_page) Clear
+        if ordersParams.search
+          a(class="button is-small is-danger" href=`${url_page}?search=`) Clear
         else 
           button(class="button is-small is-dark" type="submit") Search
-
+  p=ordersParams.status
   table(class="table is-striped is-fullwidth is-narrow")
     thead
       tr
@@ -22,10 +28,10 @@ block content
         th Order 
         th Status 
         th(colspan="2") Timeline
-        if page_name != 'past'
+        if !ordersParams.status 
           th.has-text-centered Action
         th.has-text-centered 
-          if (page_name == 'deleted')
+          if (ordersParams.status == 'deleted')
             span.has-text-success RESTORE
           else 
             span.has-text-danger Delete
@@ -45,7 +51,7 @@ block content
             else 
               span ON-SITE
             br 
-            a(href=`${url_api}${order._id}/online`) swap
+            a(href=`${url_page}/${order._id}/online`) swap
           td(class="is-size-7")
             each it in order.items
               span #{it.qty} x 
@@ -78,17 +84,17 @@ block content
                 span by #{ti.user.username}
               br
             
-          if page_name != 'past'
+          if !ordersParams.status 
             td(class="actions")
               if page_name != 'deleted'
                 div.buttons.are-small.has-addons.is-centered
                   if order.status == '01.ORDERED'
-                    a(href=url_api + order._id +"/flag/02.printing" class="button is-info is-small") PRINTING&raquo;
+                    a(href=`${url_page}/${order._id}/flag/02.printing` class="button is-info is-small") PRINTING&raquo;
                   else if order.status == '02.PRINTING'
-                    a(href=`${url_api}${order._id}/flag/01.ordered` class="button is-black") &laquo;ORDERED 
-                    a(href=`${url_api}${order._id}/flag/03.printed` class="button is-warning") PRINTED&raquo;
+                    a(href=`${url_page}/${order._id}/flag/01.ordered` class="button is-black") &laquo;ORDERED 
+                    a(href=`${url_page}/${order._id}/flag/03.printed` class="button is-warning") PRINTED&raquo;
                   else if order.status == '03.PRINTED'
-                    a(href=`${url_api}${order._id}/flag/02.printing` class="button is-info is-small") &laquo;PRINTING
+                    a(href=`${url_page}/${order._id}/flag/02.printing` class="button is-info is-small") &laquo;PRINTING
                     a(href=`/admin/postsurvey/${order._id}` class="button is-success is-light is-small" target="postsurvey") DELIVERING&raquo;
           td 
             div.buttons.is-centered
@@ -103,23 +109,20 @@ block content
 
 
   nav.pagination.is-small(role="naviation" aria-label="pagination")
-    if page > 1
-      a.pagination-previous(href=`/admin/${url_query}&page=${page*1 - 1}&limit=${limit}`) &laquo;Previous
+    if ordersParams.page > 1
+      a.pagination-previous(href=`${url_page}?page=${ordersParams.page*1 - 1}&limit=${ordersParams.limit}&search=${ordersParams.search}&status=${ordersParams.status}`) &laquo;Previous
     else 
       a.pagination-previous(disabled) Previous&laquo;
     
-    if page < totalPages 
-      a.pagination-next(href=`/admin/${url_query}&page=${page*1 + 1}&limit=${limit}`)  Next&raquo;
+    if ordersParams.page < Math.ceil(total/ordersParams.limit) 
+      a.pagination-next(href=`${url_page}?page=${ordersParams.page*1 + 1}&limit=${ordersParams.limit}&search=${ordersParams.search}&status=${ordersParams.status}`)  Next&raquo;
     else 
       a.pagination-next(disabled)  Next&raquo;
     ul.pagination-list 
       li 
-        a.pagination-link.is-current(aria-label=`Page ${page}`)=page
+        a.pagination-link.is-current(aria-label=`Page ${ordersParams.page}`)=ordersParams.page
       //- li 
       //-  span.pagination-ellipsis &hellip;
       li 
-        span / #{totalPages}
+        span / #{Math.ceil(total/ordersParams.limit)}
 
-
-  //- p=url_api
-  //- p=url_page

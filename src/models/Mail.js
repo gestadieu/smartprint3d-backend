@@ -16,7 +16,7 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-exports.sendEmail = (mailOptions) =>
+const sendEmail = (mailOptions) =>
   new Promise((resolve, reject) => {
     transporter.sendMail(mailOptions, (error) => {
       if (error) {
@@ -27,7 +27,7 @@ exports.sendEmail = (mailOptions) =>
     });
   });
 
-exports.emailOrderConfirmation = (order) => {
+const emailOrderConfirmation = (order) => {
   return {
     from: "SmartPrint3D <smartprint3d.io@gmail.com>",
     to: order.email,
@@ -52,7 +52,7 @@ exports.emailOrderConfirmation = (order) => {
   };
 };
 
-exports.emailPrinted = (order) => {
+const emailPrinted = (order) => {
   return {
     from: "SmartPrint3D <smartprint3d.io@gmail.com>",
     to: order.email,
@@ -79,4 +79,10 @@ exports.emailPrinted = (order) => {
     //   },
     // ],
   };
+};
+
+module.exports = {
+  sendEmail,
+  emailOrderConfirmation,
+  emailPrinted,
 };
