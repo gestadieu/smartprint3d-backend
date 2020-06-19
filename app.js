@@ -1,5 +1,5 @@
 require("dotenv").config();
-var path = require("path");
+const path = require("path");
 const express = require("express");
 const session = require("express-session");
 const cors = require("cors");
@@ -12,13 +12,13 @@ const http = require("http");
 const fs = require("fs");
 const mongoose = require("mongoose");
 
-var helmet = require("helmet");
+const helmet = require("helmet");
 const User = require("./src/models/User");
 const orderRoute = require("./src/routes/order");
 const adminRoute = require("./src/routes/admin");
 const surveyRoute = require("./src/routes/survey");
 const authRoute = require("./src/routes/auth");
-var { redisStore } = require("./src/services/redis");
+const { redisStore } = require("./src/services/redis");
 
 // var options = {
 //   key: fs.readFileSync("/etc/ssl/letsencrypt/smartprint3d.io.key"),
