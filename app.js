@@ -17,7 +17,7 @@ const adminRoute = require("./src/routes/admin");
 const surveyRoute = require("./src/routes/survey");
 const authRoute = require("./src/routes/auth");
 var helmet = require("helmet");
-var { redisStore } = require("./redis");
+var { redisStore } = require("./src/services/redis");
 
 // var options = {
 //   key: fs.readFileSync("/etc/ssl/letsencrypt/smartprint3d.io.key"),
@@ -42,7 +42,7 @@ app.use(
   })
 );
 
-app.set("views", path.join(__dirname, "views"));
+app.set("views", path.join(__dirname, "src/views"));
 app.set("view engine", "pug");
 app.use(express.static("public"));
 app.use(
