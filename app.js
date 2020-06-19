@@ -28,6 +28,16 @@ const app = express();
 const port = 8082;
 const ssl_port = 443;
 
+app.use(
+  session({
+    secret: "SmartPrint3Duifsa234jklafdajkqqvnvnzppadfjk",
+    keys: ["secretkey1", "secretkey2", "fdasfqwrenksdgjlh"],
+    name: "_smartPrint3D",
+    cookie: {},
+    resave: false,
+    saveUninitialized: false,
+  })
+);
 app.use(cors());
 app.use(flash());
 
@@ -41,17 +51,6 @@ app.use(flash());
 //     saveUninitialized: false,
 //   })
 // );
-
-app.use(
-  session({
-    secret: "SmartPrint3Duifsa234jklafdajkqqvnvnzppadfjk",
-    keys: ["secretkey1", "secretkey2", "fdasfqwrenksdgjlh"],
-    name: "_smartPrint3D",
-    cookie: {},
-    resave: false,
-    saveUninitialized: false,
-  })
-);
 
 app.set("views", path.join(__dirname, "src/views"));
 app.set("view engine", "pug");
