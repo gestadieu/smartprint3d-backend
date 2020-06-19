@@ -1,7 +1,7 @@
 {
   "name": "smartprint3d-backend",
-  "version": "1.0.0",
-  "description": "",
+  "version": "0.1.0",
+  "description": "Admin backend for SmartPrint3D.io a 3D Printing Kiosk Research Project",
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
