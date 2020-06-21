@@ -1,8 +1,8 @@
 const router = require("express").Router();
-const { Order } = require("../models/Order");
-const Survey = require("../models/Survey");
 const QRCode = require("qrcode");
 const mailer = require("nodemailer");
+const { Order } = require("../models/Order");
+const Survey = require("../models/Survey");
 const { sendEmail, emailOrderConfirmation } = require("../models/Mail");
 
 /**
@@ -55,10 +55,6 @@ router.post("/orders", async (request, response) => {
     });
     await survey.save();
 
-    if (order["email"]) {
-      sendEmail(emailOrderConfirmation(order));
-    }
-
     const url_status = `${request.protocol}://${request.headers.host}/api/orders/${order._id}`;
     // generate a QRCode based on the document id url
     await QRCode.toFile(`public/qrcodes/${order._id}.png`, url_status, {
@@ -66,6 +62,9 @@ router.post("/orders", async (request, response) => {
     });
 
     //Send email with QRCode
+    if (order["email"]) {
+      sendEmail(emailOrderConfirmation(order));
+    }
 
     response.json({
       success: 1,

@@ -103,6 +103,22 @@ router.get("/orders", async (request, response) => {
 /**
  *
  */
+// router.put("/orders/:id", async (req, res) => {
+//   const { id, flag } = req.body;
+//   try {
+//     const order = await Order.findById(id);
+//     if (flag) {
+//       await orderUpdateFlag(flag, request.user);
+//       await order.save();
+//       if (order.status == "03.PRINTED" && order["email"]) {
+//         sendEmail(emailPrinted(order));
+//       }
+//     }
+//     response.redirect("/admin/orders");
+//   } catch (err) {
+//     response.status(400).send({ status: "error", message: error });
+//   }
+// });
 router.get("/orders/:id/flag/:flag", async (request, response) => {
   const { id, flag } = request.params;
 
