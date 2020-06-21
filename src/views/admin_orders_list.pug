@@ -81,7 +81,7 @@ block content
               on
               span #{ti.date.toDateString()} #{ti.date.getHours()}:#{ti.date.getMinutes()} 
               if ti.status != '01.ORDERED'
-                span by #{ti.user.username}
+                span by #{ti.user ? ti.user.username: '-customer-'}
               br
             
           if !ordersParams.status 

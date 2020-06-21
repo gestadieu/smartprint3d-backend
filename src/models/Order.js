@@ -126,7 +126,7 @@ OrderSchema.method({
       this.timeline.push({
         status: this.status,
         date: Date.now(),
-        user: user._id,
+        user: user ? user._id : undefined,
       });
     }
   },
