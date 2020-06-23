@@ -4,12 +4,8 @@ const express = require("express");
 const session = require("express-session");
 const cors = require("cors");
 const flash = require("connect-flash");
-// const cookieParser = require("cookie-parser");
 const passport = require("passport");
-const LocalStrategy = require("passport-local").Strategy;
-const https = require("https");
 const http = require("http");
-const fs = require("fs");
 const mongoose = require("mongoose");
 
 const helmet = require("helmet");
@@ -20,28 +16,11 @@ const surveyRoute = require("./src/routes/survey");
 const authRoute = require("./src/routes/auth");
 const { redisStore } = require("./src/services/redis");
 
-// var options = {
-//   key: fs.readFileSync("/etc/ssl/letsencrypt/smartprint3d.io.key"),
-//   cert: fs.readFileSync("/etc/ssl/letsencrypt/smartprint3d.io.cer"),
-// };
-
 const app = express();
-const port = 8082;
-// const ssl_port = 443;
+const { PORT = 8082 } = process.env;
 
 app.use(helmet());
-app.use(cors());
-// app.use(
-//   session({
-//     secret: "SmartPrint3Duifsa234jklafdajkqqvnvnzppadfjk",
-//     keys: ["secrefqtkey1", "secretayhqkey2", "fdasfqwrenksdgjlh"],
-//     name: "_smartPrint3Dsess",
-//     // cookie: { secure: true },
-//     resave: false,
-//     saveUninitialized: true,
-//   })
-// );
-app.use(flash());
+app.use(cors({ origin: ["smartprint3d.io", "en.smartprint3d.io"] }));
 
 app.use(
   session({
@@ -53,7 +32,7 @@ app.use(
     saveUninitialized: false,
   })
 );
-
+app.use(flash());
 app.set("views", path.join(__dirname, "src/views"));
 app.set("view engine", "pug");
 app.use(express.static("public"));
@@ -67,17 +46,8 @@ app.use(
     extended: true,
   })
 );
-
-// if (app.get("env") === "production") {
-//   // Serve secure cookies, requires HTTPS
-//   session.cookie.secure = true;
-// }
 app.use(passport.initialize());
 app.use(passport.session());
-
-passport.use(User.createStrategy());
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
 
 app.use("/api", orderRoute);
 app.use("/admin", adminRoute);
@@ -91,10 +61,7 @@ const run = async () => {
     useCreateIndex: true,
   });
 
-  http.createServer(app).listen(port);
-  // https.createServer(options, app).listen(ssl_port);
-
-  // app.listen(port, () => console.log(`listening on port ${port}`));
+  http.createServer(app).listen(PORT);
 };
 
 run();

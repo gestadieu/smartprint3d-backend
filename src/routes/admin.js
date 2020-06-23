@@ -32,11 +32,25 @@ router.get("/", login.ensureLoggedIn("/login"), async (request, response) => {
     },
   ]);
 
+  const qty_per_objects = await Order.aggregate([
+    { $match: { status: { $ne: "DELETED" } } },
+    { $unwind: "$items" },
+    { $unwind: "$items.item" },
+    {
+      $group: {
+        _id: "$items.item",
+        total: { $sum: { $toInt: "$items.qty" } },
+      },
+    },
+    { $sort: { total: -1 } },
+  ]);
+
   response.render("dashboard", {
     title: "Dashboard",
     total_orders,
     active_orders,
     completed_orders,
+    qty_per_objects,
     total_objects: nb_objects[0].totalSize,
     user: request.user,
   });
@@ -197,20 +211,18 @@ router.get(
   "/surveys",
   login.ensureLoggedIn("/login"),
   async (request, response) => {
-    const filters = { status: { $ne: "DELETED" } };
+    const launchDate = new Date("2020-06-15");
+
+    const filters = {
+      status: { $ne: "DELETED" },
+      created_at: {
+        $gte: launchDate,
+      },
+    };
 
     try {
-      // if (search) {
-      //   filters.$or = [
-      //     { email: { $regex: search, $options: "i" } },
-      //     { mobile: { $regex: search, $options: "i" } },
-      //     { "items.item": { $regex: search, $options: "i" } },
-      //     { status: { $regex: search, $options: "i" } },
-      //   ];
-      // }
-
       const orders = await Order.find(filters).sort({
-        created_at: 1,
+        created_at: -1,
       });
 
       response.render("admin_surveys_list", {
@@ -265,7 +277,7 @@ router.get("/postsurvey/:id", async (request, response) => {
 router.post("/postsurvey", async (request, response) => {
   const { order_id, postsurvey } = request.body;
   const user = request.user | undefined;
-  console.log(order_id, postsurvey);
+
   try {
     const order = await Order.findById(order_id);
     order.postsurvey = postsurvey;

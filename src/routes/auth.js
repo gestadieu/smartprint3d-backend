@@ -3,6 +3,7 @@ const passport = require("passport");
 const passportLocal = require("passport-local");
 const User = require("../models/User");
 
+// passport.use(User.createStrategy());
 passport.use(new passportLocal.Strategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
