@@ -27,6 +27,7 @@ router.get("/", login.ensureLoggedIn("/login"), async (request, response) => {
     status: { $eq: "04.DELIVERED" },
   });
   const nb_objects = await Order.aggregate([
+    { $match: { status: { $ne: "DELETED" } } },
     {
       $group: { _id: null, totalSize: { $sum: { $size: "$items" } } },
     },
