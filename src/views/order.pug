@@ -18,13 +18,13 @@ block content
               
               p The status of your order is 
                 if order.status == '01.ORDERED'
-                  p processing. We are working hard at printing your order 👨‍🔧 您的3D模型正在打印中。「智打印3D」正全力以赴！
+                  span processing. We are working hard at printing your order 👨‍🔧 您的3D模型正在打印中。「智打印3D」正全力以赴！
                   //- span(class="tag is-black")=order.status
                   //- p We have well received your order and we will process it soon. Smile while we are taking care of everything ;-)
                 if order.status == '02.PRINTING'
                   //- span(class="tag is-light")=order.status
                   //- p We are working hard at printing your order 👷. Stay calm and 3D Print!
-                  p processing. We are working hard at printing your order 👨‍🔧 您的3D模型正在打印中。「智打印3D」正全力以赴！
+                  span processing. We are working hard at printing your order 👨‍🔧 您的3D模型正在打印中。「智打印3D」正全力以赴！
                 if order.status == '03.PRINTED'
                   span(class="tag is-info")=order.status
                   p We did it!!! 
