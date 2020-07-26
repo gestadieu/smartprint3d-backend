@@ -1,18 +1,28 @@
 require("dotenv").config();
 const nodemailer = require("nodemailer");
 
+// const transporter = nodemailer.createTransport({
+//   host: "smtp.gmail.com",
+//   port: 465,
+//   secure: true,
+//   auth: {
+//     type: "OAuth2",
+//     user: process.env.GMAIL_ADDRESS,
+//     clientId: process.env.GMAIL_OAUTH_CLIENT_ID,
+//     clientSecret: process.env.GMAIL_OAUTH_CLIENT_SECRET,
+//     refreshToken: process.env.GMAIL_OAUTH_REFRESH_TOKEN,
+//     accessToken: process.env.GMAIL_OAUTH_ACCESS_TOKEN,
+//     expires: Number.parseInt(process.env.GMAIL_OAUTH_TOKEN_EXPIRE, 10),
+//   },
+// });
+
 const transporter = nodemailer.createTransport({
-  host: "smtp.gmail.com",
+  host: process.env.SMTP_HOST,
   port: 465,
   secure: true,
   auth: {
-    type: "OAuth2",
-    user: process.env.GMAIL_ADDRESS,
-    clientId: process.env.GMAIL_OAUTH_CLIENT_ID,
-    clientSecret: process.env.GMAIL_OAUTH_CLIENT_SECRET,
-    refreshToken: process.env.GMAIL_OAUTH_REFRESH_TOKEN,
-    accessToken: process.env.GMAIL_OAUTH_ACCESS_TOKEN,
-    expires: Number.parseInt(process.env.GMAIL_OAUTH_TOKEN_EXPIRE, 10),
+    user: process.env.SMTP_USERNAME,
+    pass: process.env.SMTP_PASSWORD,
   },
 });
 
@@ -29,7 +39,8 @@ const sendEmail = (mailOptions) =>
 
 const emailOrderConfirmation = (order) => {
   return {
-    from: "SmartPrint3D <smartprint3d.io@gmail.com>",
+    from: "SmartPrint3D <noreply@edm.smartprint3d.io>",
+    replyTo: "smartprint3d.io@gmail.com",
     to: order.email,
     subject: `「智打印3D」SmartPrint3D - Order#${order._id}`,
     html: `<div style="text-align:center">
@@ -52,7 +63,8 @@ const emailOrderConfirmation = (order) => {
 
 const emailPrinted = (order) => {
   return {
-    from: "SmartPrint3D <smartprint3d.io@gmail.com>",
+    from: "SmartPrint3D <noreply@edm.smartprint3d.io>",
+    replyTo: "smartprint3d.io@gmail.com",
     to: order.email,
     subject: "您的訂單已在 / Your order is ready!",
     html: `<div style="text-align:center">
