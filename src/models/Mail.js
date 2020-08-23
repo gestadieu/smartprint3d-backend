@@ -73,11 +73,11 @@ const emailPrinted = (order) => {
       </a>
     </div>
     <p>感謝您體驗「智打印3D」。這是一個把先進科技帶進社區的項目，由科技發展委員會資助，澳門智慧城市概念下的其中一步。</p>
-    <p>您的訂單已在 澳門科學館 等待你！要領取你的3D寶貝，請向我們的工作人員顯示以下的二維碼。 我們的開放時間為上午11點至下午6點，星期一至日（ 星期四除外）。跟我們一同走進澳門先進科技的旅程吧！</p>
+    <p>您的訂單已在 創意空間 (文化中心地下) 等待你！要領取你的3D寶貝，請向我們的工作人員顯示以下的二維碼。 我們的開放時間為下午2點至7點，星期一至六。跟我們一同走進澳門先進科技的旅程吧！</p>
     <p>服務熱線: 63451604
     </p>
     <p>Thank you for experiencing the Smart Print 3D, a project funded by FDCT and being part of the Macau Smart City project.</p>
-    <p>Your order is ready for pick-up at the Macau Science Center, please present the following QR code to our staff at the kiosk to collect your 3D prints. Our opening hours are 11:00 am - 6:00 pm Monday to Sunday (except Thursday). Enjoy the technology advancement of Macau!</p>
+    <p>Your order is ready for pick-up at Creative Macau (G/F Macau Cultural Centre), please present the following QR code to our staff at the kiosk to collect your 3D prints. Our opening hours are 2:00 - 7:00 pm Monday to Saturday. Enjoy the technology advancement of Macau!</p>
     <p>Service Hotline: 63451604
     </p> 
     <p style="text-align:center;">
