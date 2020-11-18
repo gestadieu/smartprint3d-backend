@@ -53,7 +53,7 @@ const displayAllOptions = (orders) => {
 
 router.get(
   "/export",
-  // login.ensureLoggedIn("/login"),
+  login.ensureLoggedIn("/login"),
   async (request, response) => {
     // get data from MongoDB
     const launchDate = new Date("2020-06-15");
@@ -73,7 +73,7 @@ router.get(
 
       orders = await displayAllOptions(orders);
 
-      response.render("admin_surveys_list", {
+      response.render("admin_surveys_list2", {
         orders,
         title: "Surveys",
       });

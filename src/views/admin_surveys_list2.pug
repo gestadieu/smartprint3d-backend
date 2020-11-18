@@ -12,10 +12,12 @@ block content
           th # 
           th Object
           th Date 
-          th Contact
-          th(colspan=24) Pre-Survey 
+          th Email
+          th Mobile
+          th(colspan=29) Pre-Survey 
           th(colspan=18) Post-Survey
         tr 
+          th 
           th 
           th 
           th 
@@ -36,14 +38,20 @@ block content
           th Q7g
           th Q8 
           th Q9
-          th Q10a 
+          th Q10a
           th Q10b
-          th Q10c
-          th Q10e
-          th Q10f
+          th Q10c 
+          th Q10d 
+          th Q10e 
+          //- th Q10f
           th Q11
           th Q12
-          th Q13
+          th Q13_Library 
+          th Q13_School
+          th Q13_Museum
+          th Q13_TouristSpot
+          th Q13_Park
+          th Q13_Other
           th Q14 
           //- POST SURVEY
           th Q1
@@ -70,11 +78,8 @@ block content
             td(style="font-size:0.5rem") #{order._id}
             td(style="font-size:0.5rem") #{order.items[0].item}
             td(style="font-size:0.5rem") #{order.created_at.toDateString()}  
-            td(style="font-size:0.5rem")
-              span #{order.email} 
-              if order.email
-                br
-              span #{order.mobile}
+            td(style="font-size:0.5rem") #{order.email} 
+            td(style="font-size:0.5rem") #{order.mobile} 
             if order['presurvey']
               - var ps = order['presurvey']
               td=ps.q0
@@ -98,9 +103,15 @@ block content
               td=ps.q83 
               td=ps.q84 
               td=ps.q91 
-              td=ps.q92 
-              td=ps.q10 
-              td=ps.q11 
+              td=ps.q92               
+              //- td=ps.q10
+              td=ps.q10_library
+              td=ps.q10_school
+              td=ps.q10_museum
+              td=ps.q10_touristspot
+              td=ps.q10_park
+              td=ps.q10_other
+              td=ps.q14
             if order['postsurvey']
               - var po = order['postsurvey']
               td=po.q1 
